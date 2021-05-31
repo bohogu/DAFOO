@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
   <style type="text/css">
  	body {
@@ -42,7 +42,7 @@
 	<div class="jb-wrap">
 		
 		<div class="jb-text">
-			<p>내 몸에 필요한<br />영양성분 궁금하세요? 테스트</p>
+			<p>내 몸에 필요한<br />영양성분 궁금하세요?</p>
 			</br>
 			<a href="Member/Test5.jsp"><h1><button  id="member" type="button" class="btn btn-info btn-lg">지금 시작하기</button></h1></a>
 			</div>
