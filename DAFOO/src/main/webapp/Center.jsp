@@ -42,7 +42,7 @@
 	<div class="jb-wrap">
 		
 		<div class="jb-text">
-			<p>내 몸에 필요한<br />영양성분 궁금하세요?</p>
+			<p>내 몸에 필요한<br />영양성분 궁금하세요? 깃허브테스트</p>
 			</br>
 			<a href="Member/Test5.jsp"><h1><button  id="member" type="button" class="btn btn-info btn-lg">지금 시작하기</button></h1></a>
 			</div>
