@@ -65,6 +65,7 @@ public class BoardFrontController extends HttpServlet{
 			action = new BoardUpdate();
 			try {
 				forward = action.execute(request, response);
+				forward.setPath("/main.jsp?command=Board/update.jsp?bgroup="+request.getParameter("bgroup"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

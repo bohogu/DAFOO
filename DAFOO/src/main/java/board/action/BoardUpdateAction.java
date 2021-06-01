@@ -12,24 +12,33 @@ public class BoardUpdateAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("BoardUpdateAction execute()");
-		//한글처리
+		
 		request.setCharacterEncoding("utf-8");
 		
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		System.out.println("BoardUpdateAction:"+request.getParameter("bnum"));
+		
+		System.out.println(request.getParameter("title"));
 		BoardBean bb = new BoardBean();
 		
-		bb.setNick(request.getParameter("nick"));
+		if(bb.getNick() == null) {
+			bb.setNick("pork");
+		} else {
+			bb.setNick("nick");
+		}
 		bb.setTitle(request.getParameter("title"));
 		bb.setContent(request.getParameter("content"));
 		bb.setFile(request.getParameter("file"));
 		bb.setBnum(Integer.parseInt(request.getParameter("bnum")));
-		// BoardDAO bdao 객체 생성
+		bb.getBgroup();
+		
 		BoardDAO bdao = new BoardDAO();
-		// int check  =메서드호출  updateBoard(bb)
+		
 		bdao.update(bb);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./BoardList1.bo");
+		forward.setPath("./BoardContent.bo?bnum="+bnum);
 		return forward;
 	}
 }

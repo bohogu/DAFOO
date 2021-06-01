@@ -24,23 +24,24 @@
 			</div>
 			
 			<form method="post" action="BoardUpdateAction.bo">
+			<input type="hidden" name="bnum" value="${bb.bnum }">
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>
 						<tr>
 							<td style="width:110px;"><h5>제목</h5></td>
-							<td><input class="form-control" type="text" maxlength="50" name="boardTitle" value="${bb.title }"></td>
+							<td><input class="form-control" type="text" maxlength="50" name="title" value="${bb.title}"></td>
 						</tr>
 						<tr>
 							<td style="width:110px;"><h5>내용</h5></td>
-							<td><textarea class="form-control" rows="10" name="boardContent" maxlength="2048">${bb.content }</textarea></td>
+							<td><textarea class="form-control" rows="10" name="content" maxlength="2048">${bb.content }</textarea></td>
 						</tr>
 						<tr>
 							<td style="width:110px;"><h5>파일 업로드</h5></td>
 							<td colspan="2">
 								<input id="file" type="file" name="boardFile" class="file" hidden>
 								<div class="input-group col-xs-12">
-									<input id="tfile" type="text" class="form-control input-lg" disabled value="${bb.file }">
-									<label for="file" type="button">파일 선택</label>
+									<input id="tfile" type="text" name="file" class="form-control input-lg" disabled value="${bb.file }">
+									<label for="tfile" type="button">파일 선택</label>
 								</div>
 							</td>
 						</tr>

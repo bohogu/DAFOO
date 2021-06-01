@@ -13,6 +13,11 @@ public class BoardDeleteAction implements Action{
 		System.out.println("BoardDeleteAction  execute()");
 		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
+		System.out.println("BoardDeleteAction:"+request.getParameter("bnum"));
+		
+
+		int bgroup = Integer.parseInt(request.getParameter("bgroup"));
+		System.out.println("BoardDeleteAction:"+request.getParameter("bgroup"));
 		
 		BoardDAO bdao=new BoardDAO();
 		
@@ -20,7 +25,7 @@ public class BoardDeleteAction implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./BoardList1.bo");
+		forward.setPath("/BoardList.bo?bgroup="+bgroup);
 		return forward;
 	}
 }
