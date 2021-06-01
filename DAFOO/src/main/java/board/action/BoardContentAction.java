@@ -11,8 +11,6 @@ import board.db.BoardDAO;
 public class BoardContentAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(request.getParameter("bnum"));
-		System.out.println("BoardContentAction execute()");
 		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		

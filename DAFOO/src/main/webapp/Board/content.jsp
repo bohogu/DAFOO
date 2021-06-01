@@ -45,14 +45,7 @@
 					<a href="${context}/BoardUpdate.bo?bnum=${bb.bnum}" class="btn btn-primary">수정</a>
 					<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" class="btn btn-primary" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
 					<%-- </c:if> --%>
-					<a id="list" class="btn btn-primary">목록</a>
-					<script type="text/javascript">
-						$(function(){
-							$("#list").click(function(){
-								window.history.back();
-							});						
-						});
-					</script>
+					<a href="${context}/BoardList.bo?bgroup=${bb.bgroup}" id="list" class="btn btn-primary">목록</a>
 					</td>
 				</tr>
 			</tbody>

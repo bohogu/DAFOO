@@ -11,14 +11,11 @@ import board.db.BoardDAO;
 public class BoardUpdateAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BoardUpdateAction execute()");
 		
 		request.setCharacterEncoding("utf-8");
 		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		System.out.println("BoardUpdateAction:"+request.getParameter("bnum"));
 		
-		System.out.println(request.getParameter("title"));
 		BoardBean bb = new BoardBean();
 		
 		if(bb.getNick() == null) {
