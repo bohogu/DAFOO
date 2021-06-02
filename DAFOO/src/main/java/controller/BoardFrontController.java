@@ -71,7 +71,6 @@ public class BoardFrontController extends HttpServlet{
 			}
 			
 		} else if(command.equals("/BoardUpdateAction.bo")){
-			//  BoardUpdateAction
 			action = new BoardUpdateAction();
 			try {
 				forward = action.execute(request, response);
@@ -86,11 +85,19 @@ public class BoardFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/Main.bo")){
+			
+		} else if(command.equals("/Main.bo")){
 			// MainAction 
 			action = new MainAction();
 			try {
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/Reply.bo")){
+			action = new ReplyAction();
+			try {
+				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
