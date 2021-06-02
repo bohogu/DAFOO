@@ -29,7 +29,7 @@
          	 <li><a class="nav-link" href="${context}/MemberLogin.me">Login</a></li>
           </c:if>
           <c:if test="${sessionScope.id != null }">
-          	<li><a class="nav-link" href="${context}/">Mypage</a></li>
+          	<li><a class="nav-link" href="${context}/MemberMain.me">Mypage</a></li>
 			<li><a class="nav-link" href="${context}/MemberLogout.me">Logout</a></li>
           </c:if>
           <li><a class="nav-link" href="#pricing">Donknow</a></li>

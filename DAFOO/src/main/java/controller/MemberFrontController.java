@@ -49,7 +49,7 @@ public class MemberFrontController extends HttpServlet  {
 				
 						forward = new ActionForward();
 						// 2. 포워딩 경로 설정
-						forward.setPath("/member/member_write.jsp");
+						forward.setPath("/main.jsp?command=/member/member_write.jsp");
 						// 3. 포워딩 방식 설정(Dispatcher 방식)
 //						forward.setRedirect(false); // 기본값이 false 이므로 설정 생략 가능
 						
@@ -68,13 +68,13 @@ public class MemberFrontController extends HttpServlet  {
 						
 					} else if (command.equals("/MemberLogin.me")) { // 로그인 화면
 						forward = new ActionForward();
-						forward.setPath("/member/login.jsp");
+						forward.setPath("main.jsp?command=/member/login.jsp");
 						
 						
 						
 					} else if (command.equals("/MemberAgreeForm.me")) { // 회원가입 동의서
 						forward = new ActionForward();
-						forward.setPath("/member/member_agree.jsp");
+						forward.setPath("main.jsp?command=/member/member_agree.jsp");
 						
 						
 					} else if (command.equals("/MemberLoginPro.me")) { // 로그인 확인
@@ -103,7 +103,7 @@ public class MemberFrontController extends HttpServlet  {
 					} else if (command.equals("/MemberInfo.me")) { // MY정보조회 페이지
 						
 						forward = new ActionForward();
-						forward.setPath("/member/member_main.jsp");
+						forward.setPath("/main.jsp?command=/member/member_info.jsp");
 
 			} else if(command.equals("/MemberLogout.me")) { // 로그아웃
 				action = new MemberLogoutAction();
@@ -117,7 +117,7 @@ public class MemberFrontController extends HttpServlet  {
 				}
 			} else if (command.equals("/MemberDelete.me")) { // 회원탈퇴 페이지 이동
 				forward = new ActionForward();
-				forward.setPath("/member/member_delete.jsp");
+				forward.setPath("/main.jsp?command=/member/member_delete.jsp");
 				
 			} else if(command.equals("/MemberDeletePro.me")) { // 회원탈퇴 작업 진행
 				action = new MemberDeleteProAction();

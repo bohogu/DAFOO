@@ -34,7 +34,9 @@ public class MemberUpdateProAction implements Action {
 		
 		
 		try {
-			boolean isMember = MemberDAO.selectLoginMember(id, chPass);
+			MemberDAO dao = new MemberDAO();
+			
+			boolean isMember = dao.selectLoginMember(id, chPass);
 			
 			if (isMember) {
 				MemberBean memberBean = new MemberBean();
@@ -67,7 +69,7 @@ public class MemberUpdateProAction implements Action {
 				memberBean.setExtraAddress(request.getParameter("extraAddress"));
 				
 			
-				boolean isUpdateSuccess = MemberDAO.updateMember(memberBean);
+				boolean isUpdateSuccess = dao.updateMember(memberBean);
 				
 				if (isUpdateSuccess) {
 					forward = new ActionForward();
