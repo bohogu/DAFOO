@@ -16,21 +16,24 @@ import member.exception.LoginException;
 
 
 public class MemberDAO {
+
+	DataSource dataSource;
 	
-	private static Connection getConnection() throws Exception{
-		
-		Connection con=null;
-		Context init=new InitialContext();
-		DataSource ds=(DataSource)init.lookup("java:comp/env/jdbc/dafoo");
-		con=ds.getConnection();
-		return con;
+	public MemberDAO() {
+		try {
+			InitialContext initContext = new InitialContext();
+			Context envContext = (Context) initContext.lookup("java:/comp/env");
+			dataSource = (DataSource) envContext.lookup("jdbc/dafoo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// ==========================================================================
 	
 	
 	// 회원 등록 작업
-		public static boolean insertArticle(MemberBean memberBean) {
+		public boolean insertArticle(MemberBean memberBean) {
 			System.out.println("MemberDAO - insertArticle()");
 			
 			Connection con=null;
@@ -40,7 +43,7 @@ public class MemberDAO {
 			int result = 0;
 			try {
 				
-				 con= getConnection();
+			con= dataSource.getConnection();
 			sql = "INSERT INTO pmember(Id, nick, pass, name, age, gender, height,weight, phone,email, postcode,address,detailaddress,extraaddress)"
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
@@ -84,7 +87,7 @@ public class MemberDAO {
 		}
 			
 	// 회원정보 조회
-	public static MemberBean selectArticle(String id) {
+	public MemberBean selectArticle(String id) {
 		System.out.println("MemberDAO - selectArticle()");
 		
 		MemberBean article = null;
@@ -94,7 +97,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			
+			con= dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -137,7 +140,7 @@ public class MemberDAO {
 		return article;
 	}
 	// 로그인 작업
-	public static boolean selectLoginMember(String id, String pass) throws LoginException {
+	public boolean selectLoginMember(String id, String pass) throws LoginException {
 		System.out.println("MemberDAO - selectLoginMember()");
 		
 		boolean isMember = false;
@@ -147,9 +150,8 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		
 		try {
-			
+			con= dataSource.getConnection();
 			sql = "SELECT pass FROM pmember WHERE id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -184,7 +186,7 @@ public class MemberDAO {
 
 	
 	// 회원 삭제 작업
-	public static  boolean deleteMember(String id) {
+	public boolean deleteMember(String id) {
 		System.out.println("MemberDAO - deleteMember()");
 		
 		int deleteCount = 0;
@@ -195,6 +197,7 @@ public class MemberDAO {
 		
 		
 		try {
+			con= dataSource.getConnection();
 			String sql = "DELETE FROM pmember WHERE id=?";
 			pstmt = con.prepareStatement (sql);
 			pstmt.setString(1, id);
@@ -215,7 +218,7 @@ public class MemberDAO {
 	
 	
 	// 회원 정보 업데이트 작업
-	public static boolean updateMember(MemberBean memberBean) {
+	public boolean updateMember(MemberBean memberBean) {
 		System.out.println("MemberDAO - updateMember()");
 		
 		int updateCount = 0;
@@ -224,6 +227,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
+			con= dataSource.getConnection();
 			String sql = "UPDATE pmember "
 					+ "SET nick=?, pass=?, phone=?,  email=?, age=?, height=?,weight=? "
 					+ "postcode=?, address=?, detailAddress=?, extraAddress=? WHERE id=?";
@@ -276,6 +280,7 @@ public class MemberDAO {
 		
 		try {
 			// 회원 조회
+			con= dataSource.getConnection();
 			String sql = "SELECT * FROM pmember LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -323,7 +328,7 @@ public class MemberDAO {
 	}
 
 	// 회원 가입시 아이디중복 확인
-	public static boolean checkArticle(String id) {
+	public boolean checkArticle(String id) {
 		System.out.println("MemberDAO - checkArticle()");
 		
 		
@@ -335,6 +340,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
+			con= dataSource.getConnection();
 			String sql = "SELECT id FROM pmember WHERE id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);

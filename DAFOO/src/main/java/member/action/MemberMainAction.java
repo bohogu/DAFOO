@@ -18,7 +18,7 @@ public class MemberMainAction implements Action {
 	
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("/member/member_main.jsp");
+		forward.setPath("/main.jsp?command=/member/member_main.jsp");
 		
 		return forward;
 	}

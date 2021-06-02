@@ -25,7 +25,9 @@ public class MemberLoginProAction implements Action {
 		
 		
 		try {
-			boolean isMember = MemberDAO.selectLoginMember(id, pass);
+			MemberDAO dao = new MemberDAO();
+			
+			boolean isMember = dao.selectLoginMember(id, pass);
 			
 			if (isMember) {
 				// 로그인 성공 시 아이디값을 세션 객체에 추가
