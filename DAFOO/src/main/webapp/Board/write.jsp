@@ -22,7 +22,6 @@
 				<h2>글쓰기</h2>
 				<p class="separator"></p>
 			</div>
-			//${request.bgroup}//
 			<form method="post" action="BoardWriteAction.bo?bgroup=<%=request.getParameter("bgroup")%>">
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>

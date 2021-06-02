@@ -17,17 +17,11 @@
 		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 			<thead>
 				<tr>
-					<th colspan="4"><h4>${bb.title }</h4></th>
-				</tr>
-				<tr>
-					<td style="background-color: #fafafa; color: #000000; width: 80px;"><h5>제목</h5></td>
-					<td colspan="3"><h5>${bb.title }</h5></td>
+					<th colspan="6"><h4>${bb.title }</h4></th>
 				</tr>
 				<tr>
 					<td style="background-color: #fafafa; color: #000000; width: 80px;"><h5>작성자</h5></td>
-					<td colspan="3"><h5>${bb.nick }</h5></td>
-				</tr>
-				<tr>
+					<td><h5>${bb.nick }</h5></td>
 					<td style="background-color: #fafafa; color: #000000; width: 80px;"><h5>작성일</h5></td>
 					<td><h5>${bb.date }</h5></td>
 					<td style="background-color: #fafafa; color: #000000; width: 80px;"><h5>조회수</h5></td>
@@ -35,20 +29,40 @@
 				</tr>
 				<tr>
 					<td style="vertical-align: middle; min-height: 150px; background-color: #fafafa; color: #000000; width: 80px;"><h5>내용</h5></td>
-					<td colspan="3" style="text-align: left; height:300px;"><h5>${bb.content }</h5></td>
+					<td colspan="5" style="text-align: left; height:300px;"><h5>${bb.content }</h5></td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="5" style="text-align: right;">
+					<td colspan="6" style="text-align: right;">
 					<%-- <c:if test="${bb.nick eq nick }"> --%>
-					<a href="${context}/BoardUpdate.bo?bnum=${bb.bnum}" class="btn btn-primary">수정</a>
-					<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" class="btn btn-primary" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+					<a href="${context}/BoardUpdate.bo?bnum=${bb.bnum}">수정</a>
+					<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
 					<%-- </c:if> --%>
-					<a href="${context}/BoardList.bo?bgroup=${bb.bgroup}" id="list" class="btn btn-primary">목록</a>
+					<a href="${context}/BoardList.bo?bgroup=${bb.bgroup}" id="list">목록</a>
 					</td>
 				</tr>
 			</tbody>
+		</table>
+		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
+			<tr>
+				<th colspan="4"><h4>댓글작성</h4></th>
+			</tr>
+			<tr>
+				<td style="width:110px; text-align: center;"><h5 style="line-height:100px">${bb.nick }</h5></td>
+				<td></td>
+				<td><h5>${rb.date }</h5></td>
+			</tr>
+			<tr>
+				<td style="width:110px; text-align: center;"><h5 style="line-height:100px">${bb.nick }</h5></td>
+				<td>
+					<textarea class="form-control" rows="3" name="rcontent" maxlength="1024" placeholder="내용"></textarea>
+				</td>
+				<td>
+				<button type="submit" id="rs" hidden></button>
+				<label style="text-align: center; line-height:100px" for="rs" type="button">작성</label>
+				</td>
+			</tr>
 		</table>
 	</div>
     </section><!-- End Features Section -->

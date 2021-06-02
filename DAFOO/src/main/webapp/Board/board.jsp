@@ -52,7 +52,7 @@
 				</tr>
 			</c:forEach>
 				<tr>
-					<td colspan="5">
+					<td colspan="5" style="text-align: right;">
 						<a href="${context}/BoardWrite.bo?bgroup=${bgroup}" type="submit">글쓰기</a>
 					</td>
 				</tr>
