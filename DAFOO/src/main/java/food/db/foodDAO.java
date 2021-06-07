@@ -269,7 +269,46 @@ public class foodDAO {
 			}
 			return searchFoodAndServings; 
 		}// (끝) 음식과 해당 영양소 검색
-
+		
+/*
+		// 일일 총 
+		public ArrayList searchFoodAndServings(int fservingNum,int fnameNum, int mNum, String fDate, int fTime) {
+			
+			ArrayList searchFoodAndServings = new ArrayList();
+			
+			try{
+				con = ds.getConnection();
+				String sql = "select d.fserving?, f.food_name, f.food_size, f.cal, f.carbo, f.protein, f.fat "
+						+ "from food f JOIN dafoo d "
+						+ "ON f.food_name = d.fname? and  d.mnum=? and d.fdate=? and d.ftime=?";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, fservingNum);	
+				pstmt.setInt(2, fnameNum);	
+				pstmt.setInt(3, mNum);	
+				pstmt.setString(4, fDate);	
+				pstmt.setInt(5, fTime);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					searchFoodAndServings.add(rs.getString(1));
+					searchFoodAndServings.add(rs.getString("food_name"));
+					searchFoodAndServings.add(rs.getString("food_size"));
+					searchFoodAndServings.add(rs.getString("cal"));
+					searchFoodAndServings.add(rs.getString("carbo"));
+					searchFoodAndServings.add(rs.getString("protein"));
+					searchFoodAndServings.add(rs.getString("fat"));
+				}
+			}catch(Exception e){
+				System.out.println("FoodResultPreview : " + e);
+			}finally {
+				ResouceClose();
+			}
+			return searchFoodAndServings; 
+		}// (끝) 음식과 해당 영양소 검색
+*/
 }
 	
 	

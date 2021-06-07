@@ -46,7 +46,6 @@ public class foodNutrientAction extends HttpServlet{
 				"\",\"gProtein\":\"" + fBean.getProtein() + "\"}]";
 		
 		response.setHeader("content-type", "application/json");
-		System.out.println("json 출력문 : "+json);
 		out.print(json);
 		out.flush();
 		out.close();

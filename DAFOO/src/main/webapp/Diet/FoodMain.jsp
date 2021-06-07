@@ -149,6 +149,24 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
 	
+	var SizeTotal_1 = 0.0;
+	var CalTotal_1 = 0.0;
+	var	CarboTotal_1 = 0.0;
+	var ProteinTotal_1 = 0.0;
+	var FatTotal_1 = 0.0;
+
+	var SizeTotal_2 = 0.0;
+	var CalTotal_2 = 0.0;
+	var	CarboTotal_2 = 0.0;
+	var ProteinTotal_2 = 0.0;
+	var FatTotal_2 = 0.0;
+	
+	var SizeTotal_3 = 0.0;
+	var CalTotal_3 = 0.0;
+	var	CarboTotal_3 = 0.0;
+	var ProteinTotal_3 = 0.0;
+	var FatTotal_3 = 0.0;
+	
 		// 아침, 점심, 저녁 중 하나를 체크하는 함수
 		function setColor(btn, color) {
 		    var buttonID = document.getElementById(btn);
@@ -230,30 +248,42 @@
 		   var pritn2 = document.getElementById("carboPrint");
 		   var pritn3 = document.getElementById("proteinPrint");
 		   var pritn4 = document.getElementById("fatPrint");
-		   $("#searchFood").on("propertychange change keyup paste input select", function(event){
+		   $("#searchFood, #servInput").on("propertychange change keyup paste input select", function(event){
 // 		   $("#searchFood").on("mouseenter keydown change", function(event){
+			
 				var SearchFood = $("#searchFood").val();
+				
 				$.ajax({
 				    url: contextPath+"/foodNutrient", //request 보낼 서버의 경로
 				    type:'post', // 메소드(get, post, put 등)
 				    dataType: "text",
-				    data:{'searchValue': SearchFood }, //보낼 데이터
+				    data:{'searchValue': SearchFood}, //보낼 데이터
 				    success: function(data) {
 				    	var obj = JSON.parse(data);
 				    	
+				    	//인분
+				    	var Serving = $("#servInput").val();
+				    	
+				    	//영양소들 JSON에서 불러와 변수에 저장
 				    	var gSize = obj[0].gSize;
 				    	var gCal = obj[0].gCal;
 				    	var gCarbo = obj[0].gCarbo;
 				    	var gProtein = obj[0].gProtein;
 				    	var gFat = obj[0].gFat;
 				    	
+				    	//String 값이었던 영양소들을 Integer로 타입 변환
+				    	var numSize = parseInt(gSize);
+				    	var numCal = parseInt(gCal);
+				    	var numCarbo = parseInt(gCarbo);
+				    	var numProtein = parseInt(gProtein);
+				    	var numFat = parseInt(gFat);
 				    	
 				    	if(gCal!="null"){
-					    	document.getElementById("sizePrint").value = gSize;
-					    	document.getElementById("calPrint").value = gCal;
-					    	document.getElementById("carboPrint").value = gCarbo;
-					    	document.getElementById("proteinPrint").value = gProtein;
-					    	document.getElementById("fatPrint").value = gFat;
+					    	document.getElementById("sizePrint").value = numSize * Serving;
+					    	document.getElementById("calPrint").value = numCal * Serving;
+					    	document.getElementById("carboPrint").value = numCarbo * Serving;
+					    	document.getElementById("proteinPrint").value = numProtein * Serving;
+					    	document.getElementById("fatPrint").value = numFat * Serving;
 				    	}else{
 					    	document.getElementById("sizePrint").value = "0";
 					    	document.getElementById("calPrint").value = "0";
@@ -267,7 +297,7 @@
 				    }
 				});
 			});
-		}); // (끝)단일 음식 영양소 미리보기
+	   });// (끝)단일 음식 영양소 미리보기
 		
 //아침,점심,저녁 메뉴 불러오는 ajax
 		// 선택된 날짜 결과를 미리 보기 [아침]
@@ -465,6 +495,20 @@
 				    	
 				    	document.getElementById("breakfast-nutrient").value = "총 1회 제공량: " + Size + "총 칼로리: " + Cal +
 				    	"총 탄수화물: " + Carbo + "총 단백질: " + Protein + "총 지방: " + Fat
+				    	
+				    	var numSize = parseInt(Size);
+				    	var numCal = parseInt(Cal);
+				    	var numCarbo = parseInt(Carbo);
+				    	var numProtein = parseInt(Protein);
+				    	var numFat = parseInt(Fat);
+				    	
+				    	SizeTotal_1 = numSize;
+				   		CalTotal_1 = numCal;
+				    	CarboTotal_1 = numCarbo;
+				    	ProteinTotal_1 = numProtein;
+				    	FatTotal_1 = numFat;
+				    		
+				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3)
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -500,6 +544,21 @@
 				    	
 				    	document.getElementById("lunch-nutrient").value = "총 1회 제공량: " + Size + "총 칼로리: " + Cal +
 				    	"총 탄수화물: " + Carbo + "총 단백질: " + Protein + "총 지방: " + Fat
+				    	
+
+				    	var numSize = parseInt(Size);
+				    	var numCal = parseInt(Cal);
+				    	var numCarbo = parseInt(Carbo);
+				    	var numProtein = parseInt(Protein);
+				    	var numFat = parseInt(Fat);
+				    	
+				    	SizeTotal_2 = numSize;
+				   		CalTotal_2 = numCal;
+				    	CarboTotal_2 = numCarbo;
+				    	ProteinTotal_2 = numProtein;
+				    	FatTotal_2 = numFat;
+				    	
+				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3)
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -535,6 +594,22 @@
 				    	
 				    	document.getElementById("dinner-nutrient").value = "총 1회 제공량: " + Size + "총 칼로리: " + Cal +
 				    	"총 탄수화물: " + Carbo + "총 단백질: " + Protein + "총 지방: " + Fat
+				    	
+
+				    	var numSize = parseInt(Size);
+				    	var numCal = parseInt(Cal);
+				    	var numCarbo = parseInt(Carbo);
+				    	var numProtein = parseInt(Protein);
+				    	var numFat = parseInt(Fat);
+				    	
+				    	SizeTotal_3 = numSize;
+				   		CalTotal_3 = numCal;
+				    	CarboTotal_3 = numCarbo;
+				    	ProteinTotal_3 = numProtein;
+				    	FatTotal_3 = numFat;
+				    		
+				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3)
+				    	
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -628,7 +703,7 @@
 		</div>
 
 		<div id="status">
-			<h1>상태창</h1>
+			<h1>상태창</h1><input type="text" id="statusId" name="statusId" style="width:100%;">
 		</div>
 		<br>
 		<div id="dashboard">
