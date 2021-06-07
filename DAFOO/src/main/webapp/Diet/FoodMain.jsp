@@ -608,7 +608,10 @@
 				    	ProteinTotal_3 = numProtein;
 				    	FatTotal_3 = numFat;
 				    		
-				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3)
+				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3) + 
+				    	"총 칼로리: " + (CalTotal_1 + CalTotal_2 + CalTotal_3) +
+				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
+				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
 				    	
 			    	},
 				    error: function(err) {
