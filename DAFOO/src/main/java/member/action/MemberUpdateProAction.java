@@ -1,5 +1,4 @@
 package member.action;
-
 import java.io.PrintWriter;
 
 
@@ -9,97 +8,55 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
-import member.exception.*;
 
-
-import member.action.*;
 import member.db.MemberBean;
 import member.db.MemberDAO;
+import member.exception.LoginException;
 
 public class MemberUpdateProAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("member/MemberUpdateProAction");
+public ActionForward execute(HttpServletRequest req, HttpServletResponse resp) {
 		
-		System.out.println();
+		ActionForward forward = new ActionForward();
+		String id = (String)(req.getSession().getAttribute("id"));
 		
-		ActionForward forward = null;
+		String nick = req.getParameter("nick");
+		String pass = req.getParameter("pass");
+		String name = req.getParameter("name");
+		int  age =  (Integer.parseInt(req.getParameter("age")));
+		int  height =  (Integer.parseInt(req.getParameter("height")));
+		int  weight =  (Integer.parseInt(req.getParameter("weight")));
+		String phone =req.getParameter("phone");
+		String email = req.getParameter("email");
+		String postcode = req.getParameter("postcode");
+		String address = req.getParameter("address");
+		String detailAddress = req.getParameter("detailAddress");
+		String extraAddress = req.getParameter("extraAddress");
 		
-		// 비밀번호 확인
-		String chPass = request.getParameter("pass");
-		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("id");
+		MemberBean member = new MemberBean();
+		
+		member.setNick(nick);
+		member.setPass(pass);
+		member.setName(name);
+		member.setAge(age);
+		member.setHeight(height);
+		member.setWeight(weight);
+		member.setPhone(phone);
+		member.setEmail(email);
+		member.setPostcode(postcode);
+		member.setAddress(address);
+		member.setDetailAddress(detailAddress);
+		member.setExtraAddress(extraAddress);
+		member.setId(id);
 		
 		
 		
-		try {
-			MemberDAO dao = new MemberDAO();
-			
-			boolean isMember = dao.selectLoginMember(id, chPass);
-			
-			if (isMember) {
-				MemberBean memberBean = new MemberBean();
-				
-				// 비밀번호 변경 시
-				String pass = request.getParameter("chPass");
-				if (pass == "") {
-					pass = chPass;
-					
-				}
-				
-				// 이메일 변경 시
-				String email = request.getParameter("chEmail");
-				if (email == "") {
-					email = request.getParameter("email");
-					
-				}
-				
-				memberBean.setId(id);
-				memberBean.setPass(pass);
-				memberBean.setName(request.getParameter("name"));
-				memberBean.setAge (Integer.parseInt(request.getParameter("age")));
-				memberBean.setHeight(Integer.parseInt(request.getParameter("height")));
-				memberBean.setWeight(Integer.parseInt(request.getParameter("weight")));
-				memberBean.setPhone(request.getParameter("phone"));
-				memberBean.setEmail(email);
-				memberBean.setPostcode(request.getParameter("postcode"));
-				memberBean.setAddress(request.getParameter("address"));
-				memberBean.setDetailAddress(request.getParameter("detailAddress"));
-				memberBean.setExtraAddress(request.getParameter("extraAddress"));
-				
-			
-				boolean isUpdateSuccess = dao.updateMember(memberBean);
-				
-				if (isUpdateSuccess) {
-					forward = new ActionForward();
-					forward.setPath("MemberMain.me");
-					forward.setRedirect(true);
-					
-					
-				} else {
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>"); // 자바스크립트 시작 태그
-					out.println("alert('회원정보 수정 실패!')"); // 다이얼로그 메세지 출력
-					out.println("history.back()"); // 이전 페이지로 이동
-					out.println("</script>");
-				}
-				
-			}
-			
-		} catch (LoginException e) {
-			
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>"); // 자바스크립트 시작 태그
-			out.println("alert('" + e.getMessage() +"')"); // 실패 메세지 출력
-			out.println("history.back()"); // 이전 페이지로 이동
-			out.println("</script>");
-			
-		}
+		MemberDAO dao = new MemberDAO();
+		dao.updateMember(member);
 		
+		forward.setPath("MemberMain.me");
+		forward.setRedirect(true);
 		return forward;
-	}
-
+	}	
 }

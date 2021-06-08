@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.ActionForward;
 
+
 public class MemberLogoutAction implements Action {
 
 	@Override
@@ -23,7 +24,7 @@ public class MemberLogoutAction implements Action {
 		// 메인페이지로 포워딩
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("./"); // 프로젝트 루트로 경로 설정
+		forward.setPath(request.getContextPath()+"/main.jsp?command=Center.jsp"); // 프로젝트 루트로 경로 설정
 		
 		return forward;
 		

@@ -61,7 +61,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="center">
 					<jsp:include page="${command}"/> 
 				</td>
 			</tr>
