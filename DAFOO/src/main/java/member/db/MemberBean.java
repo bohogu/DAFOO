@@ -4,6 +4,7 @@ package member.db;
 public class MemberBean {
 	
 	
+	private int mnum;
 	private String id;
 	private String nick;
 	private String pass;
@@ -19,9 +20,12 @@ public class MemberBean {
 	private String detailAddress;
 	private String extraAddress;
 
-	
-	
-
+	public int getMunm() {
+		return mnum;
+	}
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
+	}
 	public String getId() {
 		return id;
 	}
