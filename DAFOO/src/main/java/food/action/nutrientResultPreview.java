@@ -22,13 +22,11 @@ import food.db.foodDAO;
 public class nutrientResultPreview extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet nutrientRsultPreview 실행!");
 		execute(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost nutrientRsultPreview 실행!");
 		execute(request, response);
 	}
 
@@ -73,11 +71,11 @@ public class nutrientResultPreview extends HttpServlet{
 		for(int i=1; i<=Size; i++) {
 			ArrayList arrayNutrient = fDAO.searchFoodAndServings(i, i, MNUM, StartDate, fTime);
 			
-			sizeResult += Double.parseDouble((String)arrayNutrient.get(2));			//  제공량
-			calResult += Double.parseDouble((String)arrayNutrient.get(3));			//  칼로리
-			carboResult += Double.parseDouble((String)arrayNutrient.get(4));		//  탄수화물
-			proteinResult += Double.parseDouble((String)arrayNutrient.get(5));		// 	단백질
-			fatResult += Double.parseDouble((String)arrayNutrient.get(6));			// 	지방
+			sizeResult += Double.parseDouble((String)arrayNutrient.get(2)) * Double.parseDouble((String)arrayNutrient.get(0));			//  제공량
+			calResult += Double.parseDouble((String)arrayNutrient.get(3)) * Double.parseDouble((String)arrayNutrient.get(0));			//  칼로리
+			carboResult += Double.parseDouble((String)arrayNutrient.get(4)) * Double.parseDouble((String)arrayNutrient.get(0));		//  탄수화물
+			proteinResult += Double.parseDouble((String)arrayNutrient.get(5)) * Double.parseDouble((String)arrayNutrient.get(0));		// 	단백질
+			fatResult += Double.parseDouble((String)arrayNutrient.get(6)) * Double.parseDouble((String)arrayNutrient.get(0));			// 	지방
 		}
 		
 //		배열에 담아 제이슨으로 변환을 위해서 다시 스트링 타입으로 변환

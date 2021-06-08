@@ -508,7 +508,12 @@
 				    	ProteinTotal_1 = numProtein;
 				    	FatTotal_1 = numFat;
 				    		
-				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3)
+				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3) + 
+				    	"총 칼로리: " + (CalTotal_1 + CalTotal_2 + CalTotal_3) +
+				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
+				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
+				    	
+				    	
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -558,7 +563,11 @@
 				    	ProteinTotal_2 = numProtein;
 				    	FatTotal_2 = numFat;
 				    	
-				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3)
+				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3) + 
+				    	"총 칼로리: " + (CalTotal_1 + CalTotal_2 + CalTotal_3) +
+				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
+				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
+				    	
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
