@@ -43,9 +43,12 @@
 								<h3>마이페이지</h3>
 								<ul class="list side_list">
 									<li><a href="MemberInfo.me">My 정보</a></li>
+									
 									<li><a href="MemberDelete.me">회원 탈퇴</a></li>
 								</ul>
-	
+		<br /><br /><br />
+		
+		/${nick}//${id}/
 
 
 </body>

@@ -91,6 +91,7 @@ public class MemberFrontController extends HttpServlet  {
 					} else if (command.equals("/MemberMain.me")) { // MY정보 메인화면
 						action = new MemberMainAction();
 						
+						
 						try {
 							forward = action.execute(request, response);
 							
@@ -99,12 +100,29 @@ public class MemberFrontController extends HttpServlet  {
 							
 						}
 				
+					}else if (command.equals("/MemberInfo.me")) { //정보조회
+						action = new MemberInfoAction();
 						
-					} else if (command.equals("/MemberInfo.me")) { // MY정보조회 페이지
+						try {
+							forward = action.execute(request, response);
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+						}
 						
-						forward = new ActionForward();
-						forward.setPath("/main.jsp?command=/member/member_info.jsp");
-
+						
+					} else if(command.equals("/MemberUpdatePro.me")) { // 
+						action = new MemberUpdateProAction();
+						
+						try {
+							forward = action.execute(request, response);
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+						}
+						
 			} else if(command.equals("/MemberLogout.me")) { // 로그아웃
 				action = new MemberLogoutAction();
 				
@@ -130,6 +148,8 @@ public class MemberFrontController extends HttpServlet  {
 					
 				}
 			
+			
+			
 			} else if(command.equals("/CheckId.me")) { // 회원가입시 아이디 중복 확인
 				action = new MemberCheckIdAction();
 				
@@ -140,6 +160,7 @@ public class MemberFrontController extends HttpServlet  {
 					e.printStackTrace();
 					
 				}
+				
 			
 			}
 			

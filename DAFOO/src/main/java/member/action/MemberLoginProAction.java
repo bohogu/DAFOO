@@ -7,12 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+import member.db.MemberBean;
 import member.db.MemberDAO;
 import member.exception.LoginException;
 
 
 public class MemberLoginProAction implements Action {
-
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("member/MemberLoginProAction!");
@@ -29,12 +29,20 @@ public class MemberLoginProAction implements Action {
 			
 			boolean isMember = dao.selectLoginMember(id, pass);
 			
+			
+			
 			if (isMember) {
+				
+				MemberBean mb = dao.selectArticle(id);
 				// 로그인 성공 시 아이디값을 세션 객체에 추가
 				// 1. HttpSession 객체를 가져오기
 				HttpSession session = request.getSession();
 				// 2. HttpSession 객체의 setAttribut() 메서드 호출하여 아이디 추가
-				session.setAttribute("id", id);
+				session.setAttribute("id", mb.getId());
+				session.setAttribute("nick", mb.getNick());
+				session.setAttribute("mnum", mb.getMunm());
+				session.setAttribute("mnum", mb.getMunm());
+				
 				
 				forward = new ActionForward();
 				forward.setPath(request.getContextPath()+"/main.jsp?command=Center.jsp");

@@ -88,15 +88,14 @@
 			
 	
 			var regex = /^[A-Za-z][A-Za-z0-9]{3,11}$/g;
-			
-			if(regex.exec(id)) { // 정규표현식과 일치할 경우
+
+				if(regex.exec(id)) { // 정규표현식과 일치할 경우
 				// 아이디 중복 확인()
 				$(document).ready(function(){
 					$.ajax('CheckId.me',{
 						data:{id:$('#myId').val()},
 						success:function(rdata){
 							$('#checkIdResult').html(rdata);
-							element.innerHTML = "사용 가능";
 						}
 					});
 				});
