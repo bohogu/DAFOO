@@ -35,34 +35,50 @@
 			<tbody>
 				<tr>
 					<td colspan="6" style="text-align: right;">
-					<%-- <c:if test="${bb.nick eq nick }"> --%>
+					<c:if test="${bb.nick eq nick }">
 					<a href="${context}/BoardUpdate.bo?bnum=${bb.bnum}">수정</a>
 					<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-					<%-- </c:if> --%>
+					</c:if>
 					<a href="${context}/BoardList.bo?bgroup=${bb.bgroup}" id="list">목록</a>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="6">
+						<table>
+							<div id="postcomment">
+								<div id="like">
+								</div>
+								<div class="reply">
+									<c:if test="${!empty rb.num}">
+									<tr>
+										<td colspan="1" style="width: 110px; text-align: center;"><h5>${rb.nick }</h5></td>
+										<td colspan="4"><h5>${rb.content }</h5>
+										<c:if test="${rb.nick eq nick }">
+											<label style="float: right; border: none;" for="rup" type="button">수정</label>
+											<label style="float: right; border: none;" for="rdel" type="button" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</label>
+										</c:if>
+										</td>
+										<td colspan="1" style="width: 110px; text-align: center;"><h5>${rb.date }</h5></td>
+									</tr>
+									</c:if>
+									<tr>
+										<td style="width:110px;"><h5>${bb.nick }</h5></td>
+										<td colspan="6">
+											<div style="text-align: left" contenteditable="true" dir="auto" aria-label="댓글 작성"></div>
+										</td>
+									</tr>
+									<tr style="text-align: right">
+										<td colspan="6">
+										<input type="submit" value="작성">
+										<input type="reset" value="취소">
+										</td>
+									</tr>
+								</div>
+							</div>
+						</table>
+					</td>
+				</tr>
 			</tbody>
-		</table>
-		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
-			<tr>
-				<th colspan="4"><h4>댓글작성</h4></th>
-			</tr>
-			<tr>
-				<td style="width:110px; text-align: center;"><h5 style="line-height:100px">${bb.nick }</h5></td>
-				<td></td>
-				<td><h5>${rb.date }</h5></td>
-			</tr>
-			<tr>
-				<td style="width:110px; text-align: center;"><h5 style="line-height:100px">${bb.nick }</h5></td>
-				<td>
-					<textarea class="form-control" rows="3" name="rcontent" maxlength="1024" placeholder="내용"></textarea>
-				</td>
-				<td>
-				<button type="submit" id="rs" hidden></button>
-				<label style="text-align: center; line-height:100px" for="rs" type="button">작성</label>
-				</td>
-			</tr>
 		</table>
 	</div>
     </section><!-- End Features Section -->
