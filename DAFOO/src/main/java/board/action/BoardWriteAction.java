@@ -18,12 +18,7 @@ public class BoardWriteAction implements Action{
 		
 		int bgroup = Integer.parseInt(request.getParameter("bgroup"));
 		
-		if(bb.getNick() == null) {
-			bb.setNick("pork");
-		} else {
-			bb.setNick("nick");
-		}
-		
+		bb.setNick(request.getParameter("nick"));
 		bb.setTitle(request.getParameter("boardTitle"));
 		bb.setContent(request.getParameter("boardContent"));
 		bb.setFile(request.getParameter("boardFile"));

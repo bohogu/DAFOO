@@ -28,4 +28,12 @@
     <url-pattern>*.me</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>ReplyFrontController</servlet-name>
+    <servlet-class>controller.ReplyFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReplyFrontController</servlet-name>
+    <url-pattern>*.re</url-pattern>
+  </servlet-mapping>
 </web-app>

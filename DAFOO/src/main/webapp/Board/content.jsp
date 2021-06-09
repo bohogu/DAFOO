@@ -11,6 +11,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#rdel").on("submit",function(){
+				if(confirm("삭제하시겠습니까?")){
+					var rnum = $("#rnum").val();
+					location.href="ReplyDelete.re?rnum="+rnum;
+				}
+			});
+		});
+	</script>
+	
 	<c:set var="context" value="${pageContext.request.contextPath }"/>
 	<section id="features" class="padd-section text-center">
 		<div class="container" data-aos="fade-up">
@@ -42,30 +54,33 @@
 					<tr>
 						<td colspan="6" style="text-align: right;">
 						<a href="#">댓글</a>
-						<%-- <c:if test="${bb.nick eq nick }"> --%>
+						<c:if test="${bb.nick eq nick }">
 						<a href="${context}/BoardUpdate.bo?bnum=${bb.bnum}">수정</a>
 						<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
-						<%-- </c:if> --%>
+						</c:if>
 						<a href="${context}/BoardList.bo?bgroup=${bb.bgroup}" id="list">목록</a>
 						</td>
 					</tr>
 					
-					<c:if test="${!empty rb.num}">
+					<c:forEach var="rb" items="${rb}">
 					<tr>
 						<td colspan="1" style="width: 110px; text-align: center;"><h5>${rb.nick }</h5></td>
-						<td colspan="4"><h5>${rb.content }</h5>
+						<td colspan="4" style="text-align: left;"><h5>${rb.content }</h5>
 						<c:if test="${rb.nick eq nick }">
-							<label style="float: right; border: none;" for="rup" type="button">수정</label>
-							<label style="float: right; border: none;" for="rdel" type="button" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</label>
+							<input type="hidden" id="rnum" name="rnum" value="${rnum }"/>
+							<label style="float: right; border: none;" for="rdel" id="rdel" type="button">삭제</label>
 						</c:if>
 						</td>
 						<td colspan="1" style="width: 110px; text-align: center;"><h5>${rb.date }</h5></td>
 					</tr>
-					</c:if>
+					</c:forEach>
+					<form method="post" action="ReplyWrite.re">
 					<tr>
-						<td style="width:110px;"><h5>${bb.nick }</h5></td>
+						<td style="width:110px;"><h5>${nick }</h5></td>
+						<input type="hidden" name="nick" value="${nick }">
+						<input type="hidden" name="bnum" value="${bb.bnum }">
 						<td colspan="6">
-							<div style="text-align: left" contenteditable="true" dir="auto" aria-label="댓글 작성"></div>
+							<textarea class="form-control" rows="2" name="content" maxlength="1024" placeholder="내용"></textarea>
 						</td>
 					</tr>
 					<tr style="text-align: right">
@@ -74,7 +89,7 @@
 							<input type="reset" value="취소">
 						</td>
 					</tr>
-					
+					</form>
 				</tbody>
 			</table>
 		</div>

@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
+import reply.action.ReplyDeleteAction;
+import reply.action.ReplyUpdateAction;
+import reply.action.ReplyWriteAction;
 
 // @WebServlet("*.re")
 public class ReplyFrontController extends HttpServlet{
@@ -20,24 +23,22 @@ public class ReplyFrontController extends HttpServlet{
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-		System.out.println(request.getParameter("bnum"));
-		System.out.println("//"+command);
 		
-		if(command.equals("/ReplyWrite.bo")){
+		if(command.equals("/ReplyWrite.re")){
 			action = new ReplyWriteAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/ReplyUpdateAction.bo")){
+		} else if(command.equals("/ReplyUpdateAction.re")){
 			action = new ReplyUpdateAction();
 			try {
 				forward=action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/ReplyDelete.bo")){
+		} else if(command.equals("/ReplyDelete.re")){
 			action = new ReplyDeleteAction();
 			try {
 				forward=action.execute(request, response);

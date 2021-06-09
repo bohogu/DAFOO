@@ -27,7 +27,7 @@
 					<h2>리뷰</h2> 
 				</c:if>
 				<p class="separator">
-					<a href="${context}/BoardList.bo?bgroup=2" type="button">공지사항</a>
+					<a href="${context}/BoardList.bo?bgroup=2" type="button" style="border: none; background: none;">공지사항</a>
 					<a href="${context}/BoardList.bo?bgroup=1" type="button">자유게시판</a>
 					<a href="${context}/BoardList.bo?bgroup=3" type="button">리뷰</a>
 				</p>
@@ -43,6 +43,7 @@
 			</thead>
 			<tbody>
 			<c:forEach var="bb" items="${requestScope.v }">
+			<input type="hidden" name="nick" value="${nick}"/>
 				<tr>
 					<td>
 					<a href="${context}/BoardContent.bo?bnum=${bb.bnum}">${bb.title}</a></td>

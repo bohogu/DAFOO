@@ -18,11 +18,7 @@ public class BoardUpdateAction implements Action{
 		
 		BoardBean bb = new BoardBean();
 		
-		if(bb.getNick() == null) {
-			bb.setNick("pork");
-		} else {
-			bb.setNick("nick");
-		}
+		bb.setNick(request.getParameter("nick"));
 		bb.setTitle(request.getParameter("title"));
 		bb.setContent(request.getParameter("content"));
 		bb.setFile(request.getParameter("file"));

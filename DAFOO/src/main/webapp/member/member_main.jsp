@@ -48,7 +48,7 @@
 								</ul>
 		<br /><br /><br />
 		
-		/${nick}//${id}/
+		/${nick}/${mnum}/${id}/
 
 
 </body>
