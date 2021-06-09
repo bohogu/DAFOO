@@ -24,7 +24,7 @@
           <li><a class="nav-link" href="${context}/main.jsp?command=Center.jsp">Main</a></li>
           <li><a class="nav-link" href="${context}/main.jsp?command=Guide/Test1.jsp">Guide</a></li>
           <li><a class="nav-link" href="${context}/main.jsp?command=Diet/FoodMain.jsp">Food</a></li>
-          <li><a class="nav-link" href="${context}/BoardList.bo?bgroup=1">판</a></li>
+          <li><a class="nav-link" href="${context}/BoardList2.bo?bgroup=1">판</a></li>
           <c:if test="${sessionScope.id == null }">
          	 <li><a class="nav-link" href="${context}/MemberLogin.me">Login</a></li>
           </c:if>
