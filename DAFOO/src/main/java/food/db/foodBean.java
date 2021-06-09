@@ -5,50 +5,51 @@ import java.sql.Date;
 public class foodBean {
 	
 	//음식 테이블
-	private int fidx;		//음식순서
-	private String fname;	//음식이름
-	private String fsize; 	//인분
-	private String cal; 	//칼로리
-	private String carbo;   //탄수화물
-	private String protein; //단백질
-	private String fat;		//지방
+	private int food_idx;		//	테이블 순서
+	private String food_name;	//	음식이름
+	private String food_size; 	//	인분
+	private String cal; 		//	칼로리
+	private String carbo;  	 	//	탄수화물
+	private String protein; 	//	단백질
+	private String fat;			//	지방
 	
 	//식단추가 테이블
-	private int fnum;		
-	private int fmnum;		
-	private Date fdate;		
-	private int ftime;		
-	private String fname1;	
-	private String fname2;	
-	private String fname3;	
-	private String fname4;	
-	private String fname5;	
-	private int fserving1;	
-	private int fserving2;	
-	private int fserving3;	
-	private int fserving4;	
-	private int fserving5;	
+	private int fnum;			//	테이블 순서
+	private int mnum;			//	회원넘버
+	private Date fdate;			//	날짜
+	private int ftime;			//	아침,점심,저녁
+	private String fname1;		//		음식1
+	private String fname2;		//	음식2
+	private String fname3;		//	음식3
+	private String fname4;		//	음식4
+	private String fname5;		//	음식5
+	private int fserving1;		//		인분1
+	private int fserving2;		//	인분2	
+	private int fserving3;		//	인분3	
+	private int fserving4;		//	인분4	
+	private int fserving5;		//	인분5		
+	private int fcount;			//	카운트(음식 추가)		
 	
 	
 //   --------------------음식-------------------------------	
 	
-	public int getFidx() {
-		return fidx;
+	public int getFood_idx() {
+		return food_idx;
 	}
-	public void setFidx(int fidx) {
-		this.fidx = fidx;
+	public void setFood_idx(int food_idx) {
+		this.food_idx = food_idx;
 	}
-	public String getFname() {
-		return fname;
+	public String getFood_name() {
+		return food_name;
 	}
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setFood_name(String food_name) {
+		this.food_name = food_name;
 	}
-	public String getFsize() {
-		return fsize;
+	public String getFood_size() {
+		return food_size;
 	}
-	public void setFsize(String fsize) {
-		this.fsize = fsize;
+	public void setFood_size(String food_size) {
+		this.food_size = food_size;
 	}
 	public String getCal() {
 		return cal;
@@ -73,22 +74,23 @@ public class foodBean {
 	}
 	public void setFat(String fat) {
 		this.fat = fat;
-	}
+	
 	
 //--------------------식단추가-------------------------------
 	
 	
+	}
 	public int getFnum() {
 		return fnum;
 	}
 	public void setFnum(int fnum) {
 		this.fnum = fnum;
 	}
-	public int getFmnum() {
-		return fmnum;
+	public int getMnum() {
+		return mnum;
 	}
-	public void setFmnum(int fmnum) {
-		this.fmnum = fmnum;
+	public void setMnum(int mnum) {
+		this.mnum = mnum;
 	}
 	public Date getFdate() {
 		return fdate;
@@ -161,6 +163,12 @@ public class foodBean {
 	}
 	public void setFserving5(int fserving5) {
 		this.fserving5 = fserving5;
+	}
+	public int getFcount() {
+		return fcount;
+	}
+	public void setFcount(int fcount) {
+		this.fcount = fcount;
 	}
 	
 	

@@ -3,6 +3,7 @@ package food.db;
 import java.sql.Connection;
 
 
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import net.sf.json.JSONArray;
+import org.json.simple.JSONObject;
+
+import org.json.simple.JSONArray;
 
 
 public class foodDAO {
@@ -29,7 +32,7 @@ public class foodDAO {
 			Context ctx = new InitialContext();
 			Context envContext = (Context)ctx.lookup("java:/comp/env");		
 			/*커넥션풀 얻기*/
-			ds = (DataSource)envContext.lookup("jdbc/jspbeginner");
+			ds = (DataSource)envContext.lookup("jdbc/dafoo");
 	
 		}catch(Exception e){
 			System.out.println("커넥션풀(DataSource)얻기 실패 : " + e);
@@ -61,16 +64,16 @@ public class foodDAO {
 			con = ds.getConnection();
 			String keyword = typing + "%";
 
-			String sql = "select fname from food where fname  like ? order by fidx desc ";
+			String sql = "select food_name from food where food_name  like ? order by food_idx desc ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, keyword);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()){
-				String fname = rs.getString("fname");
+				String fname = rs.getString("food_name");
 				list.add(fname);
 			}
 		}catch (Exception e){
-			System.out.println("SQL문 실행 오류 : " + e);
+			System.out.println("listDiet SQL문 실행 오류 : " + e);
 		}finally {
 			ResouceClose();
 		}
@@ -78,149 +81,199 @@ public class foodDAO {
 	}//(end)검색 자동완성(AutoComplete) 
 	
 	// 검색창옆에  음식영양소들을 뿌려주기 위한 셀렉트문
-		public int FoodNutrientResult(String foodName) {
+		public foodBean FoodNutrientResult(String foodName) {
 			
-			int result = 0;
 			foodBean fbean = new foodBean();
 			try{
 				con = ds.getConnection();
-				String sql = "select * from food where fname = ?";
+				
+				String sql = "select * from food where food_name = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, foodName);		
 				rs = pstmt.executeQuery();
 				
-					fbean.setFidx(rs.getInt(1));		//	음식 순서
-					fbean.setFname(rs.getString(2));	//	음식 이름
-					fbean.setFsize(rs.getString(3));	//	음식 인분
-					fbean.setCal(rs.getString(4));		//	음식 칼로리
-					fbean.setCarbo(rs.getString(5));	//	음식 탄수화물
-					fbean.setProtein(rs.getString(6));	//	음식 단백질
-					fbean.setFat(rs.getString(7));		//	음식 지방
-					
-				result = 1;
+				
+				if(rs.next()) {
+					fbean.setFood_idx(rs.getInt(1));		//	음식 순서
+					fbean.setFood_name(rs.getString(2));	//	음식 이름
+					fbean.setFood_size(rs.getString(3));	//	음식 인분
+					fbean.setCal(rs.getString(4));			//	음식 칼로리
+					fbean.setCarbo(rs.getString(5));		//	음식 탄수화물
+					fbean.setProtein(rs.getString(6));		//	음식 단백질
+					fbean.setFat(rs.getString(7));			//	음식 지방
+				}
 			}catch(Exception e){
-				System.out.println("SQL문 실행 오류 : " + e);
+				System.out.println("FoodNutrientResult SQL문 실행 오류 : " + e);
 			}finally {
 				ResouceClose();
 			}
-			return result; //	result값이 1이면 true, 0이면 false
-
+			return fbean;
+			
 		}// (end)검색창옆에  음식영양소들을 뿌려주기 위한 셀렉트문 
 		
-	//식단 추가후 지정된 날짜와 아침점심저녁별 식단결과를 뿌려주기 위한 셀렉트문
-	public ArrayList<foodBean> FoodAddResult(Date date, int memberNum,  int ftime) {
+	
+	//	[식단 추가 메소드]
+	//	count값 불러오기
+	public int selectFoodCount(int mnum, String startDate, int fTime) {
+		int fCount = 0;
+		try{
+			con = ds.getConnection();
+			foodBean fBean = new foodBean();
+			
+			String sql = "select fcount from dafoo where mnum=? and fdate=? and ftime=?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1,  mnum);	
+			pstmt.setString(2, startDate);		
+			pstmt.setInt(3, fTime);	
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				fCount = rs.getInt(1);
+			}
+			
+		}catch(Exception e){
+			System.out.println("addFood 실행 오류 : " + e);
+		}finally {
+			ResouceClose();
+		}
+		return fCount;
+	}//	(끝)	count값 불러오기
+	
+	// 음식 추가!
+	public void addInsertFood(int mnum, String startDate, int hTime, String searchFood, int fcount, int servInput) {
+		try{
+			con = ds.getConnection();
+			foodBean fBean = new foodBean();
+			
+			String sql = "insert into dafoo(mnum, fdate, ftime, fname1, fserving1, fcount)"
+						+ "			 values(?, ?, ?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1,  mnum);	
+			pstmt.setString(2,  startDate);	
+			pstmt.setInt(3, hTime);		
+			pstmt.setString(4, searchFood);	
+			pstmt.setInt(5, servInput);	
+			pstmt.setInt(6, fcount);	
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			System.out.println("addInsertFood 실행 오류 : " + e);
+		}finally {
+			ResouceClose();
+		}
+	}//	(끝) 음식 추가!
+	
+	// 음식 업데이트!
+		public int addUpdateFood(int mnum, String startDate, int hTime, String searchFood,int serving,int fcount) {
+			fcount +=1;
+			try{
+				con = ds.getConnection();
+				foodBean fBean = new foodBean();
+				
+				String sql = "update dafoo set fname?=?, fserving?=?, fcount=fcount+1 where mnum=? and fdate=? and ftime=?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1,  fcount);	
+				pstmt.setString(2,  searchFood);	
+				pstmt.setInt(3,  fcount);	
+				pstmt.setInt(4, serving);	
+				pstmt.setInt(5, mnum);	
+				pstmt.setString(6, startDate);	
+				pstmt.setInt(7, hTime);	
+				
+				pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("addUpdateFood 실행 오류 : " + e);
+			}finally {
+				ResouceClose();
+			}
+			return fcount;
+		}//	(끝) 음식 업데이트!
 		
-		ArrayList<foodBean> foodAddResult = new ArrayList<foodBean>();
-			foodBean bean = null;
+		// 음식 결과 미리보는 출력문 
+		public ArrayList<String> FoodResultPreview(int mNum, String startDate,int ftime) {
+			
+			ArrayList<String> FoodResultPreview = new ArrayList<String>();
 			
 			try{
 				con = ds.getConnection();
-				String sql = "select * from foodManagement where member_num = ? and fdate = ? and ftime = ? order by num desc";
+				String sql = "select fname1, fname2, fname3, fname4, fname5, "
+						+ "fserving1, fserving2, fserving3, fserving4, fserving5 "
+						+ "from dafoo where mnum=? and fdate=? and ftime=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setDate(1,  date);	
-				pstmt.setInt(2, memberNum);		
-				pstmt.setInt(3, ftime);	
+				pstmt.setInt(1, mNum);	
+				pstmt.setString(2, startDate);	
+				pstmt.setInt(3, ftime);
 				
 				rs = pstmt.executeQuery();
 
 				while(rs.next()){
-					bean = new foodBean();
-					bean.setFnum(rs.getInt(1));
-					bean.setFmnum(rs.getInt(2));
-					bean.setFdate(rs.getDate(3));
-					bean.setFtime(rs.getInt(4));
-					bean.setFname1(rs.getString(5));
-					bean.setFname2(rs.getString(6));
-					bean.setFname3(rs.getString(7));
-					bean.setFname4(rs.getString(8));
-					bean.setFname5(rs.getString(9));
-					bean.setFserving1(rs.getInt(10));
-					bean.setFserving2(rs.getInt(11));
-					bean.setFserving3(rs.getInt(12));
-					bean.setFserving4(rs.getInt(13));
-					bean.setFserving5(rs.getInt(14));
-					
-					foodAddResult.add(bean);	
+					FoodResultPreview.add(rs.getString("fname1"));
+					FoodResultPreview.add(rs.getString("fname2"));
+					FoodResultPreview.add(rs.getString("fname3"));
+					FoodResultPreview.add(rs.getString("fname4"));
+					FoodResultPreview.add(rs.getString("fname5"));
+					FoodResultPreview.add(rs.getString("fserving1"));
+					FoodResultPreview.add(rs.getString("fserving2"));
+					FoodResultPreview.add(rs.getString("fserving3"));
+					FoodResultPreview.add(rs.getString("fserving4"));
+					FoodResultPreview.add(rs.getString("fserving5"));
 				}
 			}catch(Exception e){
-				System.out.println("SQL문 실행 오류 : " + e);
+				System.out.println("FoodResultPreview : " + e);
 			}finally {
 				ResouceClose();
 			}
-			return foodAddResult; 
-	}//(end)식단 추가후 지정된 날짜와 아침점심저녁별 식단결과를 뿌려주기 위한 셀렉트문
-	
-	//식단 추가 메소드
-	//bean에 저장된 값들을 매개변수로 불러와 DB에 해당 내용을 추가한다.
-	public void addFood(foodBean fBean){
-		int num = 0;
-		try{
-			con = ds.getConnection();
+			return FoodResultPreview; 
+		}// (끝) 음식 결과 미리보는 출력문 
+		
+
+		// 음식과 해당 영양소 검색
+		public ArrayList searchFoodAndServings(int fservingNum,int fnameNum, int mNum, String fDate, int fTime) {
 			
-			// insert작업 전 변수 num에 작성순서대로 1씩 증가시키는 작업
-			String sql = "select max(fnum) from foodManagement";
-			pstmt = con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
+			ArrayList searchFoodAndServings = new ArrayList();
 			
-			if(rs.next()){
-				num = rs.getInt(1)+1;
-			}else{
-				num = 1;
-			}
-			
-//true일 경우 insert문 실행 false일 경우 update문 실행
-			//fname과 fserving값 뒤에 반복문i값을 넣고 조회를 했을때 값이 존재한다면
-			//
-			for(int i=1; i<=5; i++){
-				sql = "select fname+? fserving+? from foodManagerment "
-						+ "where fmnum = ? and fdate = ? ftime =?";
+			try{
+				con = ds.getConnection();
+				String sql = "select d.fserving?, f.food_name, f.food_size, f.cal, f.carbo, f.protein, f.fat "
+						+ "from food f JOIN dafoo d "
+						+ "ON f.food_name = d.fname? and  d.mnum=? and d.fdate=? and d.ftime=?";
+				
 				pstmt = con.prepareStatement(sql);
 				
-				pstmt.setInt(1, i);	
-				pstmt.setInt(2, i);	
-				pstmt.setInt(3, fBean.getFmnum());	
-				pstmt.setDate(4, fBean.getFdate());	
-				pstmt.setInt(5, fBean.getFtime());	
+				pstmt.setInt(1, fservingNum);	
+				pstmt.setInt(2, fnameNum);	
+				pstmt.setInt(3, mNum);	
+				pstmt.setString(4, fDate);	
+				pstmt.setInt(5, fTime);
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()){
-					
-				}else{
-					//	fname1값이 존재하지 않을 경우 
-					//  insert작업
-					if(i==1){
-						sql = "insert into foodManagement(fnum, fmnum, fdate, ftime, "
-								+ "fname1, fserving1) values(?,?,?,?,?,?)";
-						
-						pstmt = con.prepareStatement(sql);
-						
-						pstmt.setInt(1, num);
-						pstmt.setInt(2, fBean.getFmnum());
-						pstmt.setDate(3, fBean.getFdate());
-						pstmt.setInt(4, fBean.getFtime());
-						pstmt.setString(5, fBean.getFname1());
-						pstmt.setInt(6, fBean.getFserving1());
-						
-						pstmt.executeUpdate();
-					}
+				while(rs.next()){
+					searchFoodAndServings.add(rs.getString(1));
+					searchFoodAndServings.add(rs.getString("food_name"));
+					searchFoodAndServings.add(rs.getString("food_size"));
+					searchFoodAndServings.add(rs.getString("cal"));
+					searchFoodAndServings.add(rs.getString("carbo"));
+					searchFoodAndServings.add(rs.getString("protein"));
+					searchFoodAndServings.add(rs.getString("fat"));
 				}
+			}catch(Exception e){
+				System.out.println("FoodResultPreview : " + e);
+			}finally {
+				ResouceClose();
 			}
-			
-				
-		}catch(Exception e){
-			System.out.println("SQL문 실행 오류 : " + e);
-		}finally {
-			ResouceClose();
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			return searchFoodAndServings; 
+		}// (끝) 음식과 해당 영양소 검색
+
 }
+	
+	
+	
+	
+	
+
