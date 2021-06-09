@@ -309,13 +309,13 @@
 				
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
-			    var servings = 1;
+			    var ftime = 1;
 			    
 				$.ajax({
 				    url: contextPath+"/foodResultPreView", //request 보낼 서버의 경로
 				    type:'post', // 메소드(get, post, put 등)
 				    dataType: "text",
-				    data:{'mNum': memberNum, 'startDate': sDate, 'Servings':servings }, //보낼 데이터
+				    data:{'mNum': memberNum, 'startDate': sDate, 'fTime':ftime }, //보낼 데이터
 				    success: function(data) {
 				    	var obj = JSON.parse(data);
 				    	var andFood = ", ";
@@ -363,13 +363,13 @@
 				
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
-				var servings = 2;
+				var ftime = 2;
 			    
 			    $.ajax({
 				    url: contextPath+"/foodResultPreView", //request 보낼 서버의 경로
 				    type:'post', // 메소드(get, post, put 등)
 				    dataType: "text",
-				    data:{'mNum': memberNum, 'startDate': sDate ,'Servings':servings}, //보낼 데이터
+				    data:{'mNum': memberNum, 'startDate': sDate ,'fTime':ftime}, //보낼 데이터
 				    success: function(data) {
 				    	var obj = JSON.parse(data);
 				    	var andFood = ", ";
@@ -418,13 +418,13 @@
 				
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
-				var servings = 3;
+				var ftime = 3;
 			    
 			    $.ajax({
 				    url: contextPath+"/foodResultPreView", //request 보낼 서버의 경로
 				    type:'post', // 메소드(get, post, put 등)
 				    dataType: "text",
-				    data:{'mNum': memberNum, 'startDate': sDate ,'Servings':servings}, //보낼 데이터
+				    data:{'mNum': memberNum, 'startDate': sDate ,'fTime':ftime}, //보낼 데이터
 				    success: function(data) {
 				    	var obj = JSON.parse(data);
 				    	var andFood = ", ";
@@ -512,7 +512,6 @@
 				    	"총 칼로리: " + (CalTotal_1 + CalTotal_2 + CalTotal_3) +
 				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
 				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
-				    	
 				    	
 			    	},
 				    error: function(err) {

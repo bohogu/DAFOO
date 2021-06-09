@@ -44,14 +44,14 @@ public class foodResultPreview extends HttpServlet{
 		//	날짜 받아옴
 		String StartDate = request.getParameter("startDate");
 		//	인분 받아옴
-		int servings = Integer.parseInt(request.getParameter("Servings"));
+		int ftime = Integer.parseInt(request.getParameter("fTime"));
 		//	DAO생성
 		foodDAO fDAO = new foodDAO();
 		
 		JSONArray cell = new JSONArray(); // JSONObject list 를 넣을 JSONArray
 		String data = null; // 데이터를 꺼내올 BeanVO 객체 생성
 		
-		ArrayList arrayResult = fDAO.FoodResultPreview(1, StartDate, servings);
+		ArrayList arrayResult = fDAO.FoodResultPreview(1, StartDate, ftime);
 //		System.out.println(arrayResult); 6월 4일 실행 = [오브세이 우주사탕 A, 아, 도라에몽 솜사탕1, null, null, 1, 1, 1, 1, 1]
 		
 		for(int i=0; i<arrayResult.size(); i++) { // 루프를 돌려 list에 담긴 데이터를 BeanVO에 주입
