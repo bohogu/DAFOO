@@ -167,6 +167,10 @@
 	var ProteinTotal_3 = 0.0;
 	var FatTotal_3 = 0.0;
 	
+	var fNum1=0;
+	var fNum2=0;
+	var fNum3=0;
+	
 		// 아침, 점심, 저녁 중 하나를 체크하는 함수
 		function setColor(btn, color) {
 		    var buttonID = document.getElementById(btn);
@@ -321,21 +325,27 @@
 				    	var andFood = ", ";
 				    	
 				    	if(data != "[]"){
-					    	var fName1 = obj[0].breakfast;
-					    	var fName2 = obj[1].breakfast;
-					    	var fName3 = obj[2].breakfast;
-					    	var fName4 = obj[3].breakfast;
-					    	var fName5 = obj[4].breakfast;
-					    	var fServings1 = obj[5].breakfast;
-					    	var fServings2 = obj[6].breakfast;
-					    	var fServings3 = obj[7].breakfast;
-					    	var fServings4 = obj[8].breakfast;
-					    	var fServings5 = obj[9].breakfast;
+											    		
+					    	fNum1 = obj[0].breakfast;
+					    	var fName1 = obj[1].breakfast;
+					    	var fName2 = obj[2].breakfast;
+					    	var fName3 = obj[3].breakfast;
+					    	var fName4 = obj[4].breakfast;
+					    	var fName5 = obj[5].breakfast;
+					    	var fServings1 = obj[6].breakfast;
+					    	var fServings2 = obj[7].breakfast;
+					    	var fServings3 = obj[8].breakfast;
+					    	var fServings4 = obj[9].breakfast;
+					    	var fServings5 = obj[10].breakfast;
 				    	}
-					    	
+					    
+				    	
+				    	document.getElementById("hiddenFnum1").value = fNum1;
+				    	
 				    	if(fName5 != null){
 			    			document.getElementById("breakfast-menu").value = fName1 + andFood + fName2 + andFood + fName3 + andFood + fName4 + andFood + fName5;
-				    		}else if(fName4 != null){
+				    		
+				    	}else if(fName4 != null){
 				    			document.getElementById("breakfast-menu").value = fName1 + andFood + fName2 + andFood + fName3 + andFood + fName4;
 			    			}else if(fName3 != null){
 				    			document.getElementById("breakfast-menu").value = fName1 + andFood + fName2 + andFood + fName3;
@@ -375,17 +385,19 @@
 				    	var andFood = ", ";
 				    	
 				    	if(data != "[]"){
-					    	var fName1 = obj[0].breakfast;
-					    	var fName2 = obj[1].breakfast;
-					    	var fName3 = obj[2].breakfast;
-					    	var fName4 = obj[3].breakfast;
-					    	var fName5 = obj[4].breakfast;
-					    	var fServings1 = obj[5].breakfast;
-					    	var fServings2 = obj[6].breakfast;
-					    	var fServings3 = obj[7].breakfast;
-					    	var fServings4 = obj[8].breakfast;
-					    	var fServings5 = obj[9].breakfast;
+				    		fNum2 = obj[0].breakfast;
+					    	var fName1 = obj[1].breakfast;
+					    	var fName2 = obj[2].breakfast;
+					    	var fName3 = obj[3].breakfast;
+					    	var fName4 = obj[4].breakfast;
+					    	var fName5 = obj[5].breakfast;
+					    	var fServings1 = obj[6].breakfast;
+					    	var fServings2 = obj[7].breakfast;
+					    	var fServings3 = obj[8].breakfast;
+					    	var fServings4 = obj[9].breakfast;
+					    	var fServings5 = obj[10].breakfast;
 				    	}
+				    	document.getElementById("hiddenFnum2").value = fNum2;
 					    	
 				    	if(fName5 != null){
 			    			document.getElementById("lunch-menu").value = fName1 + andFood + fName2 + andFood + fName3 + andFood + fName4 + andFood + fName5;
@@ -430,18 +442,21 @@
 				    	var andFood = ", ";
 				    	
 				    	if(data != "[]"){
-					    	var fName1 = obj[0].breakfast;
-					    	var fName2 = obj[1].breakfast;
-					    	var fName3 = obj[2].breakfast;
-					    	var fName4 = obj[3].breakfast;
-					    	var fName5 = obj[4].breakfast;
-					    	var fServings1 = obj[5].breakfast;
-					    	var fServings2 = obj[6].breakfast;
-					    	var fServings3 = obj[7].breakfast;
-					    	var fServings4 = obj[8].breakfast;
-					    	var fServings5 = obj[9].breakfast;
+				    		fNum3 = obj[0].breakfast;
+					    	var fName1 = obj[1].breakfast;
+					    	var fName2 = obj[2].breakfast;
+					    	var fName3 = obj[3].breakfast;
+					    	var fName4 = obj[4].breakfast;
+					    	var fName5 = obj[5].breakfast;
+					    	var fServings1 = obj[6].breakfast;
+					    	var fServings2 = obj[7].breakfast;
+					    	var fServings3 = obj[8].breakfast;
+					    	var fServings4 = obj[9].breakfast;
+					    	var fServings5 = obj[10].breakfast;
 				    	}
 					    	
+				    	document.getElementById("hiddenFnum3").value = fNum3;
+				    	
 				    	if(fName5 != null){
 			    			document.getElementById("dinner-menu").value = fName1 + andFood + fName2 + andFood + fName3 + andFood + fName4 + andFood + fName5;
 				    		}else if(fName4 != null){
@@ -630,7 +645,34 @@
 		});// (끝) 선택된 날짜 결과를 미리 보기 [저녁]
 		
 //아침,점심,저녁 영양 불러오는 ajax
+	$(function(){
+		
+		$("#delete1").on("click",function(){
+			var fNum1 = $("#hiddenFnum1").val()
+			if(fNum1!=0){
+			location.href="foodDelete.fd?fnum="+fNum1;	
+			}else{
+				alert("아침에 추가한 식단이 없습니다.");
+			}
+		});
+		$("#delete2").on("click",function(){
+			var fNum2 = $("#hiddenFnum2").val()
+			if(fNum2!=0){
+				location.href="foodDelete.fd?fnum="+fNum2;	
+				}else{
+					alert("점심에 추가한 식단이 없습니다.");
+				}
+		});
+		$("#delete3").on("click",function(){
+			var fNum3 = $("#hiddenFnum3").val()
+			if(fNum3!=0){
+				location.href="foodDelete.fd?fnum="+fNum3;	
+				}else{
+					alert("저녁에 추가한 식단이 없습니다.");
+				}
+		});
 	
+	});
 	
 	
 	</script>
@@ -688,6 +730,9 @@
 				<div id="div-b-nutreint" class="breakfast" name="div-b-nutrient">
 					<input id="breakfast-nutrient" type="text" value="">
 				</div>
+				<div>
+					<input type="button" id="delete1" value="삭제" >
+				</div>
 			</div>
 			<div id="index-lunch">
 				<div id="lunch-subject" class="lunch" name="lunch-subject">
@@ -698,6 +743,9 @@
 				</div>
 				<div id="div-l-nutrient" class="lunch" name="div-l-nutrient">
 					<input id="lunch-nutrient" type="text" value="">
+				</div>
+				<div>
+					<input type="button" id="delete2" value="삭제">
 				</div>
 			</div>
 			<div id="index-dinner">
@@ -710,6 +758,12 @@
 				<div id="div-d-nutrient" class="dinner" name="div-d-nutrient">
 					<input id="dinner-nutrient" type="text" value="">
 				</div>
+				<div>
+					<input type="button" id="delete3" value="삭제">
+				</div>
+				<input type="hidden" id="hiddenFnum1" name="hiddenFnum1" value="">
+				<input type="hidden" id="hiddenFnum2" name="hiddenFnum2" value="">
+				<input type="hidden" id="hiddenFnum3" name="hiddenFnum3" value="">
 			</div>
 		</div>
 

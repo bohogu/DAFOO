@@ -201,7 +201,7 @@ public class foodDAO {
 			
 			try{
 				con = ds.getConnection();
-				String sql = "select fname1, fname2, fname3, fname4, fname5, "
+				String sql = "select fnum, fname1, fname2, fname3, fname4, fname5, "
 						+ "fserving1, fserving2, fserving3, fserving4, fserving5 "
 						+ "from dafoo where mnum=? and fdate=? and ftime=?";
 				pstmt = con.prepareStatement(sql);
@@ -212,6 +212,7 @@ public class foodDAO {
 				rs = pstmt.executeQuery();
 
 				while(rs.next()){
+					FoodResultPreview.add(rs.getString("fnum"));
 					FoodResultPreview.add(rs.getString("fname1"));
 					FoodResultPreview.add(rs.getString("fname2"));
 					FoodResultPreview.add(rs.getString("fname3"));
@@ -309,6 +310,24 @@ public class foodDAO {
 			return searchFoodAndServings; 
 		}// (끝) 음식과 해당 영양소 검색
 */
+		// 음식 삭제!
+		public void deleteFood(int fnum) {
+			try{
+				con = ds.getConnection();
+				
+				String sql = "delete from dafoo where fnum=?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1,  fnum);	
+				
+				pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("deleteFood 실행 오류 : " + e);
+			}finally {
+				ResouceClose();
+			}
+		}//	(끝) 음식 삭제!
 }
 	
 	

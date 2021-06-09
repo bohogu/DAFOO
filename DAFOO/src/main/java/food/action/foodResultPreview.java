@@ -61,7 +61,6 @@ public class foodResultPreview extends HttpServlet{
 			cell.add(obj); // 아까 만들어진 cell Array객체에 VO담은 객체를 주입
 		}
 		
-		
 		response.setHeader("content-type", "application/json");
 		PrintWriter pw = response.getWriter(); 
 		out.print(cell);

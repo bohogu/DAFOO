@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import action.Action;
 import action.ActionForward;
 import board.action.BoardDeleteAction;
 import food.action.foodAddAction;
+import food.action.foodDeleteAction;
 
 public class FoodFrontController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -48,9 +50,13 @@ public class FoodFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        }else if(command.equals("/update.do")){
-            System.out.println("update");
-            System.out.println("----------------");
+        }else if(command.equals("/Diet/foodDelete.fd")){
+        	action = new foodDeleteAction();
+        	try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }else if(command.equals("/select.do")){
             System.out.println("select");
             System.out.println("----------------");
