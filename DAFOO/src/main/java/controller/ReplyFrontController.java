@@ -31,13 +31,6 @@ public class ReplyFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/ReplyUpdateAction.re")){
-			action = new ReplyUpdateAction();
-			try {
-				forward=action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if(command.equals("/ReplyDelete.re")){
 			action = new ReplyDeleteAction();
 			try {

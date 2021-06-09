@@ -14,10 +14,11 @@
 
 	<script type="text/javascript">
 		$(function(){
-			$("#rdel").on("submit",function(){
+			$("#rdel").on("click",function(){
 				if(confirm("삭제하시겠습니까?")){
 					var rnum = $("#rnum").val();
-					location.href="ReplyDelete.re?rnum="+rnum;
+					var bnum = $("#bnum").val();
+					location.href="ReplyDelete.re?rnum="+rnum+"&bnum="+bnum;
 				}
 			});
 		});
@@ -53,10 +54,10 @@
 				
 					<tr>
 						<td colspan="6" style="text-align: right;">
-						<a href="#">댓글</a>
+						<a href="#" id="redrop">댓글</a>
 						<c:if test="${bb.nick eq nick }">
 						<a href="${context}/BoardUpdate.bo?bnum=${bb.bnum}">수정</a>
-						<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+						<a href="${context}/BoardDeleteAction.bo?bnum=${bb.bnum}&bgroup=${bb.bgroup}" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
 						</c:if>
 						<a href="${context}/BoardList.bo?bgroup=${bb.bgroup}" id="list">목록</a>
 						</td>
@@ -67,8 +68,9 @@
 						<td colspan="1" style="width: 110px; text-align: center;"><h5>${rb.nick }</h5></td>
 						<td colspan="4" style="text-align: left;"><h5>${rb.content }</h5>
 						<c:if test="${rb.nick eq nick }">
-							<input type="hidden" id="rnum" name="rnum" value="${rnum }"/>
-							<label style="float: right; border: none;" for="rdel" id="rdel" type="button">삭제</label>
+							<input type="hidden" id="rnum" name="rnum" value="${rb.rnum }"/>
+							<input type="hidden" id="bnum" name="bnum" value="${bb.bnum }">
+							<label style="float: right; border: none;" id="rdel" for="rdel" type="button">삭제</label>
 						</c:if>
 						</td>
 						<td colspan="1" style="width: 110px; text-align: center;"><h5>${rb.date }</h5></td>
