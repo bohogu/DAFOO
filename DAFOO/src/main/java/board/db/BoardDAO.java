@@ -223,7 +223,7 @@ public class BoardDAO {
 	public int delete(int bnum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String SQL = "delete table board where bnum = ?";
+		String SQL = "delete from board where bnum = ?";
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SQL);

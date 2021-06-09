@@ -24,15 +24,16 @@
 			</div>
 			
 			<form method="post" action="BoardUpdateAction.bo">
+			<input type="hidden" name="bnum" value="${bb.bnum }">
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>
 						<tr>
 							<td style="width:110px;"><h5>제목</h5></td>
-							<td><input class="form-control" type="text" maxlength="50" name="boardTitle" value="${bb.title }"></td>
+							<td><input class="form-control" type="text" maxlength="50" name="title" value="${bb.title}"></td>
 						</tr>
 						<tr>
 							<td style="width:110px;"><h5>내용</h5></td>
-							<td><textarea class="form-control" rows="10" name="boardContent" maxlength="2048">${bb.content }</textarea></td>
+							<td><textarea class="form-control" rows="10" name="content" maxlength="2048">${bb.content }</textarea></td>
 						</tr>
 						<tr>
 							<td style="width:110px;"><h5>파일 업로드</h5></td>
