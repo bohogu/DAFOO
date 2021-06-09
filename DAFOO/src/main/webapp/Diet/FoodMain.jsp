@@ -52,7 +52,7 @@
 	}
 	
 	#breakfast-subject, #lunch-subject, #dinner-subject {
-		padding: 10px;
+		padding: 5px;
 		width: 15%;
 		border: 1px solid #bcbcbc;
 		float: left;
@@ -144,6 +144,9 @@
 	 
 </style>
 <title></title>
+	
+	
+	<!-- 제이쿼리 -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -678,7 +681,6 @@
 	</script>
 
 	
-
 </head>
 <body>
 
@@ -722,7 +724,7 @@
 		<div id="meal">
 			<div id="index-breakfast">
 				<div id="breakfast-subject" class="breakfast" name="breakfast-subject">
-					<h1>아침</h1>
+					<h3>아침</h3>
 				</div>
 				<div id="div-b-menu" class="breakfast" name="div-b-menu">
 					<input id="breakfast-menu" type="text" value="">
@@ -736,7 +738,7 @@
 			</div>
 			<div id="index-lunch">
 				<div id="lunch-subject" class="lunch" name="lunch-subject">
-					<h1>점심</h1> 
+					<h3>점심</h3> 
 				</div>
 				<div id="div-l-menu" class="lunch" name="div-l-menu">
 					<input id="lunch-menu" type="text" value="">
@@ -750,7 +752,7 @@
 			</div>
 			<div id="index-dinner">
 				<div id="dinner-subject" class="dinner" name="dinner-subject">
-					<h1>저녁</h1>
+					<h3>저녁</h3>
 				</div>
 				<div id="div-d-menu" class="dinner" name="div-d-menu">
 					<input id="dinner-menu" type="text" value="">
@@ -772,7 +774,8 @@
 		</div>
 		<br>
 		<div id="dashboard">
-			<h1>대시보드</h1>
+			<h4>대시보드</h4>
+			<jsp:include page="/Diet/ggg.html" flush="true" />
 		</div>
 		<br>
 
