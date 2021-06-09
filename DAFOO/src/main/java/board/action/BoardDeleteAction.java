@@ -10,14 +10,9 @@ import board.db.BoardDAO;
 public class BoardDeleteAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BoardDeleteAction  execute()");
 		
 		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		System.out.println("BoardDeleteAction:"+request.getParameter("bnum"));
-		
-
 		int bgroup = Integer.parseInt(request.getParameter("bgroup"));
-		System.out.println("BoardDeleteAction:"+request.getParameter("bgroup"));
 		
 		BoardDAO bdao=new BoardDAO();
 		

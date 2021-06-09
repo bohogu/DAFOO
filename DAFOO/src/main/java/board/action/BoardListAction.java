@@ -15,15 +15,15 @@ public class BoardListAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("BoardListAction execute()");
-
+		
 		bgroup = Integer.parseInt(request.getParameter("bgroup"));
+		
 		BoardDAO bdao = new BoardDAO();
 		
 		ArrayList<BoardBean> v = bdao.getList(bgroup);
+		
 		request.setAttribute("v", v);
 		request.setAttribute("bgroup", bgroup);
-
 
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

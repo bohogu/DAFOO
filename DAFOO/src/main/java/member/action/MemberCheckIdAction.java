@@ -18,8 +18,9 @@ public class MemberCheckIdAction implements Action {
 		
 		String id = request.getParameter("id");
 		
+		MemberDAO dao = new MemberDAO(); 
 		
-		boolean chekcIdResult = MemberDAO.checkArticle(id);
+	boolean chekcIdResult = dao.checkArticle(id);
 
 		
 		String checkId = null;

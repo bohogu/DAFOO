@@ -30,7 +30,7 @@
    }
    
    .jb-www {
-   background-color: orange; 
+   background-color: black; 
    width: 100%;
    height: 890px;
    }

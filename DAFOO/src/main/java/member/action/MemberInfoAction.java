@@ -21,8 +21,8 @@ public class MemberInfoAction implements Action {
 		String id = (String) session.getAttribute("id");
 		System.out.println("id : " + id);
 		
-		
-		MemberBean article = MemberDAO.selectArticle(id);
+		MemberDAO dao = new MemberDAO();
+		MemberBean article = dao.selectArticle(id);
 		
 		request.setAttribute("article", article);
 		
