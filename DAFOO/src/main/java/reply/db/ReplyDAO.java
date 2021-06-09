@@ -81,28 +81,6 @@ public class ReplyDAO {
 			}
 		} return -1;
 	}
-
-	public int update(ReplyBean rb) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String SQL = "update reply SET content = ? where rnum = ?";
-		try {
-			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, rb.getContent());
-			pstmt.setInt(2, rb.getRnum());
-			return pstmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt != null)pstmt.close();
-				if(conn != null)conn.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		} return -1;
-	}
 	
 	public int delete(int rnum) {
 		Connection conn = null;
