@@ -31,6 +31,7 @@ public class foodAddAction implements Action{
 		String fatPrint = request.getParameter("fatPrint");				//	지방
 		int hTime = Integer.parseInt(request.getParameter("hTime"));	//	아침,점심,저녁
 		
+		int ajaxDate = 1;
 		
 		System.out.println(hTime);
 		
@@ -56,10 +57,14 @@ public class foodAddAction implements Action{
 		
 		
 		
+		request.setAttribute("StartDate", startDate);
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/main.jsp?command=Diet/FoodMain.jsp");
+		
+		
 		return forward;
 		
 	}

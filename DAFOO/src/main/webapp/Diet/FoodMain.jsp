@@ -152,6 +152,20 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
 	
+	function checkAdd(){
+		if(!document.getElementById("searchFood").value){
+			alert("음식을 검색 해 주세요");
+			return false;
+		}else if(!document.getElementById("startDate").value){	                   
+			alert("날짜를 선택 해 주세요");
+			return false;
+		}else if(!document.getElementById("hTime").value ){
+			alert("아침 점심 저녁 중 하나를 선택 해 주세요");
+			return false;
+		}
+	}
+	</script>
+	<script>
 	var SizeTotal_1 = 0.0;
 	var CalTotal_1 = 0.0;
 	var	CarboTotal_1 = 0.0;
@@ -245,6 +259,28 @@
 			});
 		}) // (끝)검색 자동 완성 기능(AutoComplete)
 		
+		var actionDate = 
+		//test
+		$(function() {
+		  window.onload = function(){
+			  StartDate
+			  document.getElementById("startDate").value = 0;
+		  }
+		});
+		
+		
+		//test끝
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//	단일 음식 영양소 미리보기 Ajax
 		$(function() {
 			//			= /DAFOO
@@ -311,9 +347,7 @@
 		$(function() {
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
-			
-		   $("#startDate").change(function(event){
-				
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("change",function(){
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
 			    var ftime = 1;
@@ -342,7 +376,7 @@
 					    	var fServings5 = obj[10].breakfast;
 				    	}
 					    
-				    	
+				    	var ftime = 1
 				    	document.getElementById("hiddenFnum1").value = fNum1;
 				    	
 				    	if(fName5 != null){
@@ -371,8 +405,7 @@
 		$(function() {
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
-			
-		   $("#startDate").change(function(event){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("change",function(){
 				
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
@@ -428,9 +461,8 @@
 		$(function() {
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("change",function(){
 			
-		   $("#startDate").change(function(event){
-				
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
 				var ftime = 3;
@@ -492,7 +524,7 @@
 			var contextPath = "${pageContext.request.contextPath}";
 			
 		   $("#startDate").change(function(event){
-				
+			  	 
 			   	var memberNum = 1;						//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
 			    var fTime = 1;							//	아점저
@@ -700,7 +732,7 @@
 				    	CarboTotal_3 = numCarbo;
 				    	ProteinTotal_3 = numProtein;
 				    	FatTotal_3 = numFat;
-				    		
+				    	
 				    	document.getElementById("statusId").value = "총 1회 제공량: " + (SizeTotal_1 + SizeTotal_2 + SizeTotal_3) + 
 				    	"총 칼로리: " + (CalTotal_1 + CalTotal_2 + CalTotal_3) +
 				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
@@ -793,9 +825,9 @@
 		
 		
 		<div id="slide">
-		<form action="foodAdd.fd" id="addForm" >
+		<form action="foodAdd.fd" id="addForm" onsubmit="return checkAdd()">
 			<div class="btn2">
-				<input id="startDate" type='date' name="startDate" value="" />
+				<input id="startDate" type='date' name="startDate" value="${StartDate}" />
 				<div>
 					<input id="button1" type='button' value='아침' onclick="setColor('1', '')";/> 
 					<input id="button2" type='button' value='점심' onclick="setColor('2', '')";/> 
