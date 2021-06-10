@@ -531,6 +531,40 @@
 				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
 				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
 				    	
+				    	//차트
+						const mydata = [ (CalTotal_1 + CalTotal_2 + CalTotal_3), 
+										(CarboTotal_1 + CarboTotal_2 + CarboTotal_3) ,
+										(ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3), 
+										(FatTotal_1 + FatTotal_2 + FatTotal_3)];
+						const mydataHalf = [ 5, 10, 20, 7];
+						var ctx = document.getElementsByClassName("myChart");
+
+						var mixedChart = {
+							type : 'bar',
+							labels : [ '칼로리', '탄수화물', '단백질', '지방'],
+							datasets : [ {
+								label : '빨강',
+								data : mydata,
+								backgroundColor : 'rgba(256, 0, 0, 0.1)'
+							},{
+								label : '파랑',
+								data : mydataHalf,
+								backgroundColor : 'transparent',
+								borderColor : 'skyblue',
+								type : 'line'
+							} ]
+						};
+						var myChart = new Chart(ctx, {
+							type : 'bar',
+							data : mixedChart,
+							options : {
+								legend : {
+									display : true
+								}
+							}
+						});
+						//차트끝
+						
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -585,6 +619,39 @@
 				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
 				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
 				    	
+				    	//차트
+						const mydata = [ (CalTotal_1 + CalTotal_2 + CalTotal_3), 
+										(CarboTotal_1 + CarboTotal_2 + CarboTotal_3) ,
+										(ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3), 
+										(FatTotal_1 + FatTotal_2 + FatTotal_3)];
+						const mydataHalf = [ 5, 10, 20, 7];
+						var ctx = document.getElementsByClassName("myChart");
+
+						var mixedChart = {
+							type : 'bar',
+							labels : [ '칼로리', '탄수화물', '단백질', '지방'],
+							datasets : [ {
+								label : '빨강',
+								data : mydata,
+								backgroundColor : 'rgba(256, 0, 0, 0.1)'
+							},{
+								label : '파랑',
+								data : mydataHalf,
+								backgroundColor : 'transparent',
+								borderColor : 'skyblue',
+								type : 'line'
+							} ]
+						};
+						var myChart = new Chart(ctx, {
+							type : 'bar',
+							data : mixedChart,
+							options : {
+								legend : {
+									display : true
+								}
+							}
+						});
+						//차트끝
 			    	},
 				    error: function(err) {
 				        //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -638,6 +705,40 @@
 				    	"총 칼로리: " + (CalTotal_1 + CalTotal_2 + CalTotal_3) +
 				    	"총 탄수화물: " + (CarboTotal_1 + CarboTotal_2 + CarboTotal_3) + "총 단백질: " + (ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3) + 
 				    	"총 지방: " + (FatTotal_1 + FatTotal_2 + FatTotal_3)
+				    	
+				    	//차트
+						const mydata = [ (CalTotal_1 + CalTotal_2 + CalTotal_3), 
+										(CarboTotal_1 + CarboTotal_2 + CarboTotal_3) ,
+										(ProteinTotal_1 + ProteinTotal_2 + ProteinTotal_3), 
+										(FatTotal_1 + FatTotal_2 + FatTotal_3)];
+						const mydataHalf = [ 5, 10, 20, 7];
+						var ctx = document.getElementsByClassName("myChart");
+
+						var mixedChart = {
+							type : 'bar',
+							labels : [ '칼로리', '탄수화물', '단백질', '지방'],
+							datasets : [ {
+								label : '빨강',
+								data : mydata,
+								backgroundColor : 'rgba(256, 0, 0, 0.1)'
+							},{
+								label : '파랑',
+								data : mydataHalf,
+								backgroundColor : 'transparent',
+								borderColor : 'skyblue',
+								type : 'line'
+							} ]
+						};
+						var myChart = new Chart(ctx, {
+							type : 'bar',
+							data : mixedChart,
+							options : {
+								legend : {
+									display : true
+								}
+							}
+						});
+						//차트끝
 				    	
 			    	},
 				    error: function(err) {
@@ -775,7 +876,7 @@
 		<br>
 		<div id="dashboard">
 			<h4>대시보드</h4>
-			<jsp:include page="/Diet/ggg.html" flush="true" />
+			<jsp:include page="/Diet/FoodChart.html" flush="true" />
 		</div>
 		<br>
 
