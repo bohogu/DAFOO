@@ -652,7 +652,7 @@
 							data : mixedChart,
 							options : {
 								legend : {
-									display : true
+									display : false
 								}
 							}
 						});
