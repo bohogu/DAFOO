@@ -1,6 +1,7 @@
 package food.action;
 
 import java.io.PrintWriter;
+
 import java.sql.Date;
 
 import java.text.DateFormat;
@@ -62,9 +63,8 @@ public class foodAddAction implements Action{
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/main.jsp?command=Diet/FoodMain.jsp");
-		
-		
+		forward.setPath("/main.jsp?command=Diet/FoodMain.jsp");		
+//true	forward.setPath("/DAFOO/Diet/FoodMain.jsp");
 		return forward;
 		
 	}

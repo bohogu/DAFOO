@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -152,18 +154,8 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
 	
-	function checkAdd(){
-		if(!document.getElementById("searchFood").value){
-			alert("음식을 검색 해 주세요");
-			return false;
-		}else if(!document.getElementById("startDate").value){	                   
-			alert("날짜를 선택 해 주세요");
-			return false;
-		}else if(!document.getElementById("hTime").value ){
-			alert("아침 점심 저녁 중 하나를 선택 해 주세요");
-			return false;
-		}
-	}
+	
+	 
 	</script>
 	<script>
 	var SizeTotal_1 = 0.0;
@@ -259,25 +251,6 @@
 			});
 		}) // (끝)검색 자동 완성 기능(AutoComplete)
 		
-		var actionDate = 
-		//test
-		$(function() {
-		  window.onload = function(){
-			  StartDate
-			  document.getElementById("startDate").value = 0;
-		  }
-		});
-		
-		
-		//test끝
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -347,7 +320,7 @@
 		$(function() {
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
-			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("change",function(){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("click change",function(){
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
 			    var ftime = 1;
@@ -405,7 +378,7 @@
 		$(function() {
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
-			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("change",function(){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("click change",function(){
 				
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
@@ -461,7 +434,7 @@
 		$(function() {
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
-			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("change",function(){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("click change",function(){
 			
 			   	var memberNum = 1;							//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
@@ -523,7 +496,7 @@
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
 			
-		   $("#startDate").change(function(event){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("click change",function(){
 			  	 
 			   	var memberNum = 1;						//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
@@ -610,7 +583,7 @@
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
 			
-		   $("#startDate").change(function(event){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("click change",function(){
 				
 			   	var memberNum = 1;						//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
@@ -697,7 +670,7 @@
 			//			= /DAFOO
 			var contextPath = "${pageContext.request.contextPath}";
 			
-		   $("#startDate").change(function(event){
+			$("#startDate, #breakfast-menu, #lunch_menu, #dinner_menu").on("click change",function(){
 				
 			   	var memberNum = 1;						//	회원 아이디 값(나중에 바꿀 예정)
 			    var sDate = $("#startDate").val();		//	달력 값
@@ -807,8 +780,21 @@
 					alert("저녁에 추가한 식단이 없습니다.");
 				}
 		});
-	
+		
+	//페이지가 로드 될때 마다 자동클릭
+	$(function(){
+		$(document).ready(function(){
+
+			$("#startDate").bind("click", function(){
+				console.log("클릭!");
+			});
+
+			$("#startDate").trigger("click");
+			});
+		});
+	//(끝) 페이지가 로드 될때 마다 자동클릭
 	});
+	
 	
 	
 	</script>
@@ -825,7 +811,7 @@
 		
 		
 		<div id="slide">
-		<form action="foodAdd.fd" id="addForm" onsubmit="return checkAdd()">
+		<form action="foodAdd.fd" id="addForm" onsubmit="return checkAdd()" >
 			<div class="btn2">
 				<input id="startDate" type='date' name="startDate" value="${StartDate}" />
 				<div>
