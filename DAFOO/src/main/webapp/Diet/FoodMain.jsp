@@ -79,10 +79,15 @@
 		border: 1px solid #bcbcbc;
 	}
 	
-	#feedback {
+	#fb_div {
 		padding: 10px;
-		height: 150px;
+		height: 500px;
 		border: 1px solid #bcbcbc;
+	}
+	
+	#fb_input{
+		width: 100%;
+		height: 70%;
 	}
 	
 	#menuRecommend {
@@ -154,8 +159,33 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
 	
-	
+// 		 음식 검색창 유효성검사
+// 		 음식, 시간대, 날짜를 입력하여야 정상적으로 추가 기능이 실행 되게 한다. 
+	$(function(){
+	    $("#adSubmit").click(function(){
+	    	if($('#searchFood').val()==""){
+	    		alert("음식을 입력해 주세요^^")
+	    		return false;
+	    	}else if($('#hTime').val()==""){
+	    		alert("아 점 저 체크 해주세요^^")	
+	    		return false;
+	    	}else if($('#startDate').val()==""){
+	    		alert("날짜 체크 해주세요^^")	
+	    		return false;
+	    	}
+	    });
 	 
+	});
+	
+	//활동지수 설문조사 제출하기 전 데이트 값이 입력되어 있는지 확인하기
+	function checkDate(){
+		//달력에 값이 없다면
+		if (!document.getElementById("startDate").value){
+			alert("날짜를 먼저 선택 해 주세요.");
+			return false;
+		}
+	}
+	
 	</script>
 	<script>
 	var SizeTotal_1 = 0.0;
@@ -757,40 +787,54 @@
 	$(function(){
 		
 		$("#delete1").on("click",function(){
+			var deleteDate = $("#startDate").val()
 			var fNum1 = $("#hiddenFnum1").val()
 			if(fNum1!=0){
-			location.href="foodDelete.fd?fnum="+fNum1;	
+			location.href="foodDelete.fd?fnum="+fNum1+"&dDate="+deleteDate;	
 			}else{
 				alert("아침에 추가한 식단이 없습니다.");
 			}
 		});
 		$("#delete2").on("click",function(){
+			var deleteDate = $("#startDate").val()
 			var fNum2 = $("#hiddenFnum2").val()
 			if(fNum2!=0){
-				location.href="foodDelete.fd?fnum="+fNum2;	
+				location.href="foodDelete.fd?fnum="+fNum2+"&dDate="+deleteDate;	
 				}else{
 					alert("점심에 추가한 식단이 없습니다.");
 				}
 		});
 		$("#delete3").on("click",function(){
+			var deleteDate = $("#startDate").val()
 			var fNum3 = $("#hiddenFnum3").val()
 			if(fNum3!=0){
-				location.href="foodDelete.fd?fnum="+fNum3;	
+				location.href="foodDelete.fd?fnum="+fNum3+"&dDate="+deleteDate;	
 				}else{
 					alert("저녁에 추가한 식단이 없습니다.");
 				}
 		});
 		
-	//페이지가 로드 될때 마다 자동클릭
+	// 페이지가 로드 될때 마다 startDate를 자동클릭
+	// 식단을 추가하거나 삭제하면서 넘어온 date값에 ajax를 실행시키기 위한 함수
 	$(function(){
 		$(document).ready(function(){
 
 			$("#startDate").bind("click", function(){
-				console.log("클릭!");
 			});
 
 			$("#startDate").trigger("click");
 			});
+		   
+			// 식단 추가와 삭제를 했을떄 정상적으로 처리 되었는지 확인	
+			// 1: 추가실패(음식이 없음) 2: 추가완료 3: 삭제완료
+	    	if($('#checkComplete').val()==2){
+	    		alert("음식이 정상적으로 추가 되었습니다.")
+	    	}else if($('#checkComplete').val()==1){
+	    		alert("그런 음식은 없습니다.")
+	    		
+	    	}else if($('#checkComplete').val()==3){
+	    		alert("식단 삭제가 정상적으로 처리 되었습니다.")
+	    	}
 		});
 	//(끝) 페이지가 로드 될때 마다 자동클릭
 	});
@@ -811,9 +855,10 @@
 		
 		
 		<div id="slide">
-		<form action="foodAdd.fd" id="addForm" onsubmit="return checkAdd()" >
+		<form action="foodAdd.fd" id="addForm">
 			<div class="btn2">
 				<input id="startDate" type='date' name="startDate" value="${StartDate}" />
+				<input id="checkComplete" type="hidden" name="checkComplete" value="${CheckComplete}" />
 				<div>
 					<input id="button1" type='button' value='아침' onclick="setColor('1', '')";/> 
 					<input id="button2" type='button' value='점심' onclick="setColor('2', '')";/> 
@@ -897,14 +942,33 @@
 			<jsp:include page="/Diet/FoodChart.html" flush="true" />
 		</div>
 		<br>
-
-		<div id="feedback">
+		
+		<div id="fb_div">
 			<h1>피드백</h1>
-		</div>
-		<br>
-
-		<div id="menuRecommend">
-			<h1>식단추천</h1>
+<!-- 			<input type='text' id="fb_input"/> -->
+			<form action="foodFeedback.fd" id="addForm" onsubmit="return checkDate()" >
+			  <h3>평소 활동하는 유형을 선택하여 주세요</h3>
+			  <div>
+			    <input type="radio" id="activityChoice1" name="activityChoice" value="25">
+			    앉아서 주로 생활하거나 매일 가벼운 움직임만 하며 활동량이 적은 경우<br>
+			    
+			    <input type="radio" id="activityChoice2" name="activityChoice" value="35">
+			    규칙적인 생활로 보통의 활동량을 가진 경우<br>
+			    
+			    <input type="radio" id="activityChoice3" name="activityChoice" value="40">
+			    육체노동 등 평소 신체 활동량이 많은 경우
+			    
+			  </div>
+		      <div id="fb_result" style="display: none" />
+		    	${id}님의 BMI지수는 ${Bmi}이며 표준 BMI지수는 ${SdBmi}입니다.
+		    	하루 권장 칼로리는 ${DailyCal}입니다.
+		    	
+		   	  </div>							    
+			  <div>
+			    <button type="submit" id="choiceSb">Submit</button>
+			  </div>
+			</form>
+			
 		</div>
 		<br>
 	</div>

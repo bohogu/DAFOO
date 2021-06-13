@@ -15,6 +15,7 @@ import action.ActionForward;
 import board.action.BoardDeleteAction;
 import food.action.foodAddAction;
 import food.action.foodDeleteAction;
+import food.action.foodFeedbackAction;
 
 public class FoodFrontController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -57,9 +58,13 @@ public class FoodFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        }else if(command.equals("/select.do")){
-            System.out.println("select");
-            System.out.println("----------------");
+        }else if(command.equals("/Diet/foodFeedback.fd")){
+        	action = new foodFeedbackAction(); 
+        	try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }else if(command.equals("/delete.do")){
             System.out.println("delete");
             System.out.println("----------------");

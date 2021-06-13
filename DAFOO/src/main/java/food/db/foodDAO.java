@@ -18,6 +18,8 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONObject;
 
+import member.db.MemberBean;
+
 import org.json.simple.JSONArray;
 
 
@@ -271,45 +273,6 @@ public class foodDAO {
 			return searchFoodAndServings; 
 		}// (끝) 음식과 해당 영양소 검색
 		
-/*
-		// 일일 총 
-		public ArrayList searchFoodAndServings(int fservingNum,int fnameNum, int mNum, String fDate, int fTime) {
-			
-			ArrayList searchFoodAndServings = new ArrayList();
-			
-			try{
-				con = ds.getConnection();
-				String sql = "select d.fserving?, f.food_name, f.food_size, f.cal, f.carbo, f.protein, f.fat "
-						+ "from food f JOIN dafoo d "
-						+ "ON f.food_name = d.fname? and  d.mnum=? and d.fdate=? and d.ftime=?";
-				
-				pstmt = con.prepareStatement(sql);
-				
-				pstmt.setInt(1, fservingNum);	
-				pstmt.setInt(2, fnameNum);	
-				pstmt.setInt(3, mNum);	
-				pstmt.setString(4, fDate);	
-				pstmt.setInt(5, fTime);
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()){
-					searchFoodAndServings.add(rs.getString(1));
-					searchFoodAndServings.add(rs.getString("food_name"));
-					searchFoodAndServings.add(rs.getString("food_size"));
-					searchFoodAndServings.add(rs.getString("cal"));
-					searchFoodAndServings.add(rs.getString("carbo"));
-					searchFoodAndServings.add(rs.getString("protein"));
-					searchFoodAndServings.add(rs.getString("fat"));
-				}
-			}catch(Exception e){
-				System.out.println("FoodResultPreview : " + e);
-			}finally {
-				ResouceClose();
-			}
-			return searchFoodAndServings; 
-		}// (끝) 음식과 해당 영양소 검색
-*/
 		// 음식 삭제!
 		public void deleteFood(int fnum) {
 			try{
@@ -328,6 +291,65 @@ public class foodDAO {
 				ResouceClose();
 			}
 		}//	(끝) 음식 삭제!
+		
+		//	음식 검색창에 DB에 저장된 음식을 검색 하였는지 확인하기 위한 과정
+		public int CheckSearchFood(String searchFood) {
+			//	조회된 음식 값이 없다면 0
+			int result = 0;
+			
+			try{
+				con = ds.getConnection();
+				String sql = "select food_name "
+						+ 	 "from food "
+						+ 	 "where food_name = ?";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, searchFood);	
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					//조회된 음식 값이 존재 한다면 1
+					result = 1;
+				}
+			}catch(Exception e){
+				System.out.println("FoodResultPreview : " + e);
+			}finally {
+				ResouceClose();
+			}
+			return result; 
+		}
+		//	(끝)음식 검색창에 DB에 저장된 음식을 검색 하였는지 확인하기 위한 과정
+		
+		//bmi지수와 표준체중을 구하기위한 MemberBean 생성
+		public MemberBean foodMemberBean(String userId) {
+			
+			MemberBean mBean = null;
+			
+			try {
+				
+				con = ds.getConnection();
+				String sql = "select height, weight, age FROM pmember WHERE id=?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, userId);	
+				
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					mBean = new MemberBean();
+					
+					mBean.setHeight(rs.getInt(1));
+					mBean.setWeight(rs.getInt(2));
+					mBean.setAge(rs.getInt(3));
+				}
+			}catch(Exception e){
+				System.out.println("foodMemberBean : " + e);
+			}finally {
+				ResouceClose();
+			}
+			return mBean; 
+		}//	(끝)bmi지수와 표준체중을 구하기위한 MemberBean 생성
 }
 	
 	

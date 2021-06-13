@@ -21,17 +21,19 @@ public class foodDeleteAction implements Action{
 	public ActionForward execute(HttpServletRequest request, 
 									HttpServletResponse response) throws Exception {
 		System.out.println("foodDeleteAction 도착!");
-		
+		int checkComplete = 3;
 		int fNum = Integer.parseInt(request.getParameter("fnum"));			//	검색창 음식 이름
+		String sDate = request.getParameter("dDate");			//	날짜 xxxx-dd-yy
 		
 		foodDAO fDAO = new foodDAO();		//	DAO객체 생성
 		fDAO.deleteFood(fNum);
+		request.setAttribute("StartDate", sDate);
+		request.setAttribute("CheckComplete", checkComplete);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("/main.jsp?command=Diet/FoodMain.jsp");
 		return forward;
-		
 	}
 	
 }

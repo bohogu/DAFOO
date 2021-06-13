@@ -22,13 +22,11 @@ import food.db.foodDAO;
 public class foodResultPreview extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet foodResultPreView 실행!");
 		execute(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost foodResultPreView 실행!");
 		execute(request, response);
 	}
 
