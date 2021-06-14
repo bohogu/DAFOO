@@ -1,26 +1,26 @@
-package board.action;
+package reply.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import board.db.BoardDAO;
+import reply.db.ReplyDAO;
 
-public class BoardDeleteAction implements Action{
+public class ReplyDeleteAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("////del");
 		
-		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		int bgroup = Integer.parseInt(request.getParameter("bgroup"));
+		int rnum = Integer.parseInt(request.getParameter("rnum"));
 		
-		BoardDAO bdao=new BoardDAO();
+		ReplyDAO rdao = new ReplyDAO();
 		
-		bdao.delete(bnum);
+		rdao.delete(rnum);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("/BoardList.bo?bgroup="+bgroup);
+		forward.setPath("#");
 		return forward;
 	}
 }

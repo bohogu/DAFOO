@@ -1,13 +1,12 @@
+
 <%@page import="member.db.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	//session 객체에 저장된 id 값 가져와서 변수에 저장
-String id = (String) session.getAttribute("id");
-
-// MemberBean 객체 가져오기
+String id = (String)session.getAttribute("id");
 MemberBean article = (MemberBean) request.getAttribute("article");
+
 %>
 
 <!DOCTYPE html>
@@ -27,7 +26,6 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 	}
 %>
 
-<!-- Required meta tags -->
 
 <!-- 우편번호 검색   -->
 <script
@@ -208,44 +206,13 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 </head>
 
 <body>
-	<!--::header part start::-->
-
-	<!-- Header part end-->
-
-
-	<!--================ 메뉴 영역 =================-->
-	<section class="cart_area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="left_sidebar_area">
-						<aside class="left_widgets p_filter_widgets">
-							<div class="l_w_title"></div>
-							<div class="side_menu">
-								<h3>마이페이지</h3>
-								<ul class="list side_list">
-									<li class="active"><a href="/member/MemberInfo.me">My 정보</a></li>
-									<li><a href="/member/MemberDelete.me">회원 탈퇴</a></li>
-								</ul>
-							</div>
-							<!-- .side_menu -->
-						</aside>
-					</div>
-				</div>
-				<!--================ 메뉴 영역 =================-->
-				<!-- 				<div class="col-lg-9"> -->
-				<!-- 					<div class="row align-items-center latest_product_inner"> -->
-				<!-- 						        <section class="cart_area"> -->
-
-<!-- 				<div id="sub_content"> -->
-					<section class="member_form" style="width:75%">
 
 
 						<div class="container">
 							<!-- 							<div class="cart_inner"> -->
 							<h2 class="member_title">My 정보</h2>
 							<!-- .member_title -->
-							<form action="/member/MemberUpdatePro.me" id="join" method="post"
+							<form action="MemberUpdatePro.me" id="join" method="post"
 								name="fr" onsubmit="return check()">
 								<fieldset>
 									<legend>필수 항목</legend>
@@ -254,43 +221,55 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 											<col width="15%" />
 											<col width="" />
 										</colgroup>
+
 										<tr>
-<!-- 											<td class=td_size>아이디</td> -->
+<!-- 										<td class=td_size>아이디</td> -->
 											<td width="450">아이디</td>
-											<td><%=article.getId()%></td>
+											<td><input type="text" name="id" required="required"
+												value="<%=article.getId()%>"></td>
+										</tr>
+										<tr>
+											<td>닉네임</td>
+											<td><input type="text" name="nick" required="required"
+												value="<%=article.getNick() %>"></td>
+											
 										</tr>
 										<tr>
 											<td>비밀번호</td>
-											<td><input type="password" name="pass" id="pass"
-												required="required"></td>
+											<td><input type="password" name="pass" id="Pass"
+												onkeyup="checkPasswd(this)" value="<%=article.getPass()%>">
+												<span id="checkPasswdResult" ></span></td>
 										</tr>
-										<tr>
-											<td>변경할 <br>비밀번호</td>
-											<td><input type="password" name="chPass" id="chPass"
-												onkeyup="checkPasswd(this)"><span
-												id="checkPasswdResult"></span></td>
-										</tr>
-										<tr>
+								<!-- 		<tr>
 											<td>변경할 <br>비밀번호 재확인</td>
 											<td><input type="password" name="rePass" id="rePass"
 												onkeyup="retryPasswd(this)"><span
 												id="retryPasswdResult"></span></td>
-										</tr>
+										</tr>   -->
 										<tr>
 											<td>이름</td>
-											<td><%=article.getName()%></td>
+											<td><input type="text" name="name" required="required"
+												value="<%=article.getName()%>"></td>
 										</tr>
 										<tr>
 											<td>나이</td>
-											<td><%=article.getAge()%></td>
+											<td><input type="text" name="age" required="required"
+												value="<%=article.getAge()%>"></td>
+										</tr>
+										<tr>
+											<td>성별</td>
+											<td><input type="text" name="gender" required="required"
+												value="<%=article.getGender()%>"></td>
 										</tr>
 										<tr>
 											<td>키</td>
-											<td><%=article.getHeight()%></td>
+											<td><input type="text" name="height" required="required"
+												value="<%=article.getHeight()%>"></td>
 										</tr>
 										<tr>
 											<td>몸무게</td>
-											<td><%=article.getWeight()%></td>
+											<td><input type="text" name="weight" required="required"
+												value="<%=article.getWeight()%>"></td>
 										</tr>
 										<tr>
 											<td>전화번호</td>
@@ -300,19 +279,15 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 										</tr>
 										<tr>
 											<td>이메일</td>
-											<td><input type="email" name="email" id="email"
-												required="required" value="<%=article.getEmail()%>"></td>
+											<td><input  type="email" name="email" id="email" required="required"
+											 		value="<%=article.getEmail()%>"></td>
 										</tr>
 										<tr>
-											<td>변경할 이메일</td>
-											<td><input type="email" name="chEmail" id="chEmail"></td>
-										</tr>
-										<tr>
-											<td>변경할 <br>이메일 재확인</td>
+										<!--  	<td>변경할 <br>이메일 재확인</td>
 											<td><input type="email" name="reEmail" id="reEmail"
 												onkeyup="retryEmail(this)"><span
 												id="retryEmailResult"></span></td>
-										</tr>
+										</tr> -->
 										
 									</table>
 								</fieldset>
@@ -352,22 +327,7 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 
 
 						</div>
-						<!-- .container -->
-					</section>
-					<!-- .member_form -->
-<!-- 				</div> -->
-				<!-- #sub_content -->
-				
-				</div>
-				</div>
-				</section>
-
-
-
-				<!--::footer_part start::-->
-		
-				<!--::footer_part end::-->
-
+					
 				
 </body>
 

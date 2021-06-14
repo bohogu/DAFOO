@@ -40,26 +40,16 @@
 </head>
 
 <body>
-	<!--::header part start::-->
-	<jsp:include page="../inc/top.jsp" />
-	<!-- Header part end-->
-    <!--     서브비주얼 -->
-	<jsp:include page="../inc/main.jsp"/>
-
-	<!--================ 메뉴 영역 =================-->
-
 								<h3>마이페이지</h3>
 								<ul class="list side_list">
 									<li><a href="MemberInfo.me">My 정보</a></li>
+									
 									<li><a href="MemberDelete.me">회원 탈퇴</a></li>
 								</ul>
-	
+		<br /><br /><br />
+		
+		/${nick}/${mnum}/${id}/
 
-
-
-	<!--::footer_part start::-->
-	<jsp:include page="../inc/bottom.jsp" />
-	<!--::footer_part end::-->
 
 </body>
 

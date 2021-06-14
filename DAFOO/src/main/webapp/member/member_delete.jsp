@@ -25,59 +25,20 @@
 		}
 	%>
 
-    <!-- Required meta tags -->
 
 <body>
-    <!--::header part start::-->
-   
-    <!-- Header part end-->
-   
-	
 
-    <!--================ 메뉴 영역 =================-->
-    <section class="cart_area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="left_sidebar_area">
-						<aside class="left_widgets p_filter_widgets">
-							<div class="l_w_title"></div>
-							<div class="side_menu">
-								<h3>마이페이지</h3>
-								<ul class="list side_list">					
-									<li><a href="MemberInfo.me">My 정보</a></li>
-									<li class="active"><a href="MemberDelete.me">회원 탈퇴</a></li>
-								</ul>
-							</div><!-- .side_menu -->
-						</aside>
-					</div>
-				</div>
-				<!--================ 메뉴 영역 =================-->
-				<div class="col-lg-9">
-					<div class="row align-items-center latest_product_inner">
 						<!--         <section class="cart_area"> -->
 						<div class="container">
 							<div class="cart_inner">
 								<h2 class="member_title">회원탈퇴</h2><!-- .member_title -->
-								<form action="/member/MemberDeletePro.me" method="post">
-			                    	비밀번호 확인 <input type="password" name="pass"> <input type="submit" value="탈퇴" >
+								<form action="MemberDeletePro.me" method="post">
+			                    	비밀번호 확인 <input type="password" name="pass"> <input type="submit" value="탈퇴" class="genric-btn primary circle">
 			                    </form>
 							
 							</div>
 						</div>
-						<!--   </section> -->
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-    <!--================End Category Product Area =================-->
-	
-
-    <!--::footer_part start::-->
-  
-    <!--::footer_part end::-->
 
     
 </body>

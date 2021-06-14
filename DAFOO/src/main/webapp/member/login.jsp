@@ -8,11 +8,12 @@
 
 </head>
 <style>
-	#layout{
+		#layout{
 		margin:0 auto;
 		width:100%;
-	}
-	
+	} 
+
+
 </style>
 <body>
 	<table id="layout">
@@ -21,11 +22,11 @@
 		</tr>
 		<tr>
 			<td>
-				<div class="limiter">
+	<div class="limiter">
 					<div class="container-login100">
 						<div class="wrap-login100">
 							<div class="login100-form-title"
-								style="background-image: url(../MemberCss/images/bg-01.jpg);">
+								style="background-image: url(../assets/img/bg-01.jpg);">
 								<span class="login100-form-title-1"> </span>
 							</div>
 

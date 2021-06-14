@@ -29,6 +29,15 @@
   </servlet-mapping>
   
   <servlet>
+<<<<<<< HEAD
+    <servlet-name>ReplyFrontController</servlet-name>
+    <servlet-class>controller.ReplyFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReplyFrontController</servlet-name>
+    <url-pattern>*.re</url-pattern>
+  </servlet-mapping>
+=======
     <servlet-name>FoodFrontController</servlet-name>
     <servlet-class>controller.FoodFrontController</servlet-class>
   </servlet>
@@ -37,4 +46,5 @@
     <url-pattern>*.fd</url-pattern>
   </servlet-mapping>
   
+>>>>>>> refs/remotes/origin/Sry
 </web-app>

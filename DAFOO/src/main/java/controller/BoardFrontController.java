@@ -13,6 +13,7 @@ import action.ActionForward;
 import board.action.BoardContentAction;
 import board.action.BoardDeleteAction;
 import board.action.BoardListAction;
+import board.action.BoardListAction2;
 import board.action.BoardUpdateAction;
 import board.action.BoardWriteAction;
 import board.action.MainAction;
@@ -27,7 +28,6 @@ public class BoardFrontController extends HttpServlet{
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-		System.out.println(request.getParameter("bnum"));
 		System.out.println("//"+command);
 		
 		
@@ -39,7 +39,14 @@ public class BoardFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-		} else if(command.equals("/BoardWrite.bo")){
+		}else if(command.equals("/BoardList2.bo")){
+			action = new BoardListAction2();
+			try {
+				forward=action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/BoardWrite.bo")){
 			forward = new ActionForward();
 			
 			System.out.println("BoardWrite.bo:"+request.getParameter("bgroup"));
@@ -71,7 +78,6 @@ public class BoardFrontController extends HttpServlet{
 			}
 			
 		} else if(command.equals("/BoardUpdateAction.bo")){
-			//  BoardUpdateAction
 			action = new BoardUpdateAction();
 			try {
 				forward = action.execute(request, response);
@@ -86,7 +92,8 @@ public class BoardFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/Main.bo")){
+			
+		} else if(command.equals("/Main.bo")){
 			// MainAction 
 			action = new MainAction();
 			try {
@@ -94,7 +101,7 @@ public class BoardFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		} 
 		//이동
 		if(forward!=null){
 			if(forward.isRedirect()){//true

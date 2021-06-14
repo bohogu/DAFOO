@@ -26,17 +26,18 @@ public class MemberDeleteProAction implements Action {
 		String id = (String) session.getAttribute("id");
 		
 		try {
-			boolean isMember = MemberDAO.selectLoginMember(id, pass);
+			MemberDAO dao = new MemberDAO();
+			boolean isMember = dao.selectLoginMember(id, pass);
 			
 			if (isMember) {
 			
-				boolean isDeleteSuccess = MemberDAO.deleteMember(id);
+				boolean isDeleteSuccess = dao.deleteMember(id);
 				
 				if (isDeleteSuccess) {
 					session.removeAttribute("id");
 					
 					forward = new ActionForward();
-					forward.setPath("./");
+					forward.setPath("MemberLoginPro.me");
 					forward.setRedirect(true);
 					
 					

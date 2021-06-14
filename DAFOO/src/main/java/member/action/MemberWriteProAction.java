@@ -36,8 +36,9 @@ public class MemberWriteProAction implements Action {
 		memberBean.setDetailAddress(request.getParameter("detailAddress"));
 		memberBean.setExtraAddress(request.getParameter("extraAddress"));
 		
+		MemberDAO dao = new MemberDAO();
 		
-		boolean isWriteSuccess = MemberDAO.insertArticle(memberBean);
+		boolean isWriteSuccess = dao.insertArticle(memberBean);
 		
 		// 1. ActionForward 객체 생성
 		ActionForward forward = new ActionForward();

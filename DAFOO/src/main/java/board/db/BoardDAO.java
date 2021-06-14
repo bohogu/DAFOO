@@ -240,4 +240,20 @@ public class BoardDAO {
 			}
 		} return -1;
 	}
+	public int getCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String SQL = "select count(*) from board";
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			ResultSet rs = pstmt.executeQuery();
+			
+			return rs.getInt("count");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return -1;
+	}
 }

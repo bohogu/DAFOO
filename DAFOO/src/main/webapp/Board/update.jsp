@@ -40,8 +40,8 @@
 							<td colspan="2">
 								<input id="file" type="file" name="boardFile" class="file" hidden>
 								<div class="input-group col-xs-12">
-									<input id="tfile" type="text" name="file" class="form-control input-lg" disabled value="${bb.file }">
-									<label for="tfile" type="button">파일 선택</label>
+									<input id="tfile" type="text" class="form-control input-lg" disabled value="${bb.file }">
+									<label for="file" type="button">파일 선택</label>
 								</div>
 							</td>
 						</tr>
