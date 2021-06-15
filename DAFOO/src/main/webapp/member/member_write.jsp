@@ -12,7 +12,8 @@
 <title>DaFoo 회원가입</title>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-
+ <!-- Template Main CSS File -->
+ <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <style>
 	#layout{
@@ -25,7 +26,6 @@
 </head>
 
 </head>
-
 <!-- 우편번호 검색   -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -72,12 +72,18 @@
 	            }
 		    }).open();
 		}
-	</script>
+		</script>
+
+
+	
 
 <!-- 아이디/비밀번호 검사   -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 		// submit 전 최종 상태(아이디, 패스워드 규칙 일치 여부) 저장할 전역변수 설정
+		
+		
+		
 		var checkIdResult = false, checkPasswdResult = false, retryPasswdResult = false, retryEmailResult = false; 
 	
 		function checkId(idForm) { // 파라미터 this 로 전달된 ID 입력폼을 매개변수에 저장
@@ -227,10 +233,23 @@
 		}
 	
 	</script>
+<script type="text/javascript">
+function mailCheck() {
+	var to = document.getElementById("email").value;
+	window.open("member/SendMail.jsp?to=" + to, "메일인증 창","width=500, height=500");
+	
+	}
+
+
+
+</script>	
+	
 
 </head>
 
 <body>
+
+<jsp:include page="../inc/main.jsp"></jsp:include>
 
 	<table id="layout">
 		<tr style="height: 75px;">
@@ -330,6 +349,8 @@
 												onkeyup="retryEmail(this)"><span
 												id="retryEmailResult"></span>
 										</div>
+										<div class="input-group"><input type="button" value="인증요청" onclick="mailCheck();"> </div>
+										
 										<div class="input-group">
 											주소 <input class="input--style-2" type="text"
 												name="postcode" id="postcode" class="id" placeholder="우편번호"
@@ -364,6 +385,7 @@
 			</td>
 		</tr>
 	</table>
+
 
 
 </body>

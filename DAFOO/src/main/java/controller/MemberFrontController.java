@@ -13,10 +13,12 @@ import action.ActionForward;
 
 import member.action.MemberCheckIdAction;
 import member.action.MemberDeleteProAction;
+import member.action.MemberFindIDAction;
 import member.action.MemberInfoAction;
 import member.action.MemberLoginProAction;
 import member.action.MemberLogoutAction;
 import member.action.MemberMainAction;
+import member.action.MemberFindPassAction;
 import member.action.MemberUpdateProAction;
 import member.action.MemberWriteProAction;
 
@@ -122,7 +124,36 @@ public class MemberFrontController extends HttpServlet  {
 							e.printStackTrace();
 							
 						}
+					}else if (command.equals("/MemberFind.me")) { //아이디 찾기 
+						forward = new ActionForward();
 						
+						forward.setPath("/main.jsp?command=/member/findID.jsp");
+						
+					} else if(command.equals("/MemberFindID.me")) { // 
+						action = new MemberFindIDAction();
+						try {
+							forward = action.execute(request, response);
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+						}
+						
+						
+					}else if (command.equals("/MemberPass.me")) { //비밀번호 찾기 
+						forward = new ActionForward();
+						
+						forward.setPath("/main.jsp?command=/member/findPass.jsp");
+						
+					} else if(command.equals("/MemberFindPass.me")) { // 
+						action = new MemberFindPassAction();
+						try {
+							forward = action.execute(request, response);
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+						}
 			} else if(command.equals("/MemberLogout.me")) { // 로그아웃
 				action = new MemberLogoutAction();
 				

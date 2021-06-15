@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.ActionForward;
 import reply.action.ReplyDeleteAction;
-import reply.action.ReplyUpdateAction;
 import reply.action.ReplyWriteAction;
 
 // @WebServlet("*.re")
@@ -31,6 +30,7 @@ public class ReplyFrontController extends HttpServlet{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 		} else if(command.equals("/ReplyDelete.re")){
 			action = new ReplyDeleteAction();
 			try {
@@ -39,6 +39,7 @@ public class ReplyFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
+		
 		//이동
 		if(forward!=null){
 			if(forward.isRedirect()){//true

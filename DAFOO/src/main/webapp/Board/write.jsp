@@ -22,7 +22,7 @@
 				<h2>글쓰기</h2>
 				<p class="separator"></p>
 			</div>
-			<form method="post" action="BoardWriteAction.bo?bgroup=<%=request.getParameter("bgroup")%>">
+			<form method="post" enctype="multipart/form-data" action="BoardWriteAction.bo?bgroup=<%=request.getParameter("bgroup")%>">
 				<input type="hidden" name="nick" value="${nick}"/>
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>

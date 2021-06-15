@@ -29,6 +29,8 @@ public class BoardContentAction implements Action{
 		request.setAttribute("bb", bb);
 		request.setAttribute("rb", rb);
 		request.setAttribute("bgroup", bb.getBgroup());
+		request.setAttribute("file", bb.getFile());
+		request.setAttribute("rfile", bb.getRfile());
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

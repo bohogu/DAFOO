@@ -11,8 +11,14 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 
 <!DOCTYPE html>
 <html lang="zxx">
-<link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/layout.css">
+<link href="../assets/css/style.css" rel="stylesheet">
+<style>
+	#layout{
+		margin:0 auto;
+		width:100%;
+	}
+	
+</style>
 <head>
 
 <%
@@ -206,129 +212,111 @@ MemberBean article = (MemberBean) request.getAttribute("article");
 </head>
 
 <body>
+<jsp:include page="../inc/main.jsp"></jsp:include>
 
+	<table id="layout">
+		<tr style="height: 75px;">
+			<td><jsp:include page="../inc/top.jsp" /></td>
+		</tr>
+		<tr>
+			<td>
+			<jsp:include page="../inc/top.jsp"></jsp:include>
+				<!--================main_part Area =================-->
+				<div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+					<div class="wrapper wrapper--w960">
+						<section class="member_form">
+						<div class="card card-2" style="flex-direction: row;">
+								<div class="card-heading"></div>
+								<div class="card-body" style="font-weight: 400; font-size: 14px;">
+									<h2 class="title" style="font-size: 30px;">MY 정보</h2>
+							
+									<form action="MemberUpdatePro.me" id="join" method="post"
+										name="fr" onsubmit="return check()">
+									
+											<div class="input-group">
+											아이디<input class="input--style-2" type="text" name="id" required="required"
+												value="<%=article.getId()%>"></div>
 
-						<div class="container">
-							<!-- 							<div class="cart_inner"> -->
-							<h2 class="member_title">My 정보</h2>
-							<!-- .member_title -->
-							<form action="MemberUpdatePro.me" id="join" method="post"
-								name="fr" onsubmit="return check()">
-								<fieldset>
-									<legend>필수 항목</legend>
-									<table class="necessary">
-										<colgroup>
-											<col width="15%" />
-											<col width="" />
-										</colgroup>
-
-										<tr>
-<!-- 										<td class=td_size>아이디</td> -->
-											<td width="450">아이디</td>
-											<td><input type="text" name="id" required="required"
-												value="<%=article.getId()%>"></td>
-										</tr>
-										<tr>
-											<td>닉네임</td>
-											<td><input type="text" name="nick" required="required"
-												value="<%=article.getNick() %>"></td>
-											
-										</tr>
-										<tr>
-											<td>비밀번호</td>
-											<td><input type="password" name="pass" id="Pass"
+											<div class="input-group">
+											닉네임<input class="input--style-2" type="text" name="nick" required="required"
+												value="<%=article.getNick() %>"></div>
+											<div class="input-group">
+											비밀번호<input  class="input--style-2" type="password" name="pass" id="Pass"
 												onkeyup="checkPasswd(this)" value="<%=article.getPass()%>">
-												<span id="checkPasswdResult" ></span></td>
-										</tr>
-								<!-- 		<tr>
-											<td>변경할 <br>비밀번호 재확인</td>
-											<td><input type="password" name="rePass" id="rePass"
-												onkeyup="retryPasswd(this)"><span
-												id="retryPasswdResult"></span></td>
-										</tr>   -->
-										<tr>
-											<td>이름</td>
-											<td><input type="text" name="name" required="required"
-												value="<%=article.getName()%>"></td>
-										</tr>
-										<tr>
-											<td>나이</td>
-											<td><input type="text" name="age" required="required"
-												value="<%=article.getAge()%>"></td>
-										</tr>
-										<tr>
-											<td>성별</td>
-											<td><input type="text" name="gender" required="required"
-												value="<%=article.getGender()%>"></td>
-										</tr>
-										<tr>
-											<td>키</td>
-											<td><input type="text" name="height" required="required"
-												value="<%=article.getHeight()%>"></td>
-										</tr>
-										<tr>
-											<td>몸무게</td>
-											<td><input type="text" name="weight" required="required"
-												value="<%=article.getWeight()%>"></td>
-										</tr>
-										<tr>
-											<td>전화번호</td>
-											<td><input type="text" name="phone" required="required"
-												value="<%=article.getPhone()%>"
-												placeholder="ex.000-0000-0000"></td>
-										</tr>
-										<tr>
-											<td>이메일</td>
-											<td><input  type="email" name="email" id="email" required="required"
-											 		value="<%=article.getEmail()%>"></td>
-										</tr>
-										<tr>
-										<!--  	<td>변경할 <br>이메일 재확인</td>
-											<td><input type="email" name="reEmail" id="reEmail"
-												onkeyup="retryEmail(this)"><span
-												id="retryEmailResult"></span></td>
-										</tr> -->
+												<span id="checkPasswdResult" ></span></div>
+												<div class="input-group">
+											이름<input  class="input--style-2" type="text" name="name" required="required"
+												value="<%=article.getName()%>"></div>
 										
-									</table>
-								</fieldset>
-								<fieldset>
-									<table>
-										<tr>
-<!-- 											<td rowspan="3" class=td_size>주소</td> -->
-											<td rowspan="3" width="120">주소</td>
-											<td><input type="text" name="postcode" id="postcode"
+											<div class="input-group">
+											나이<input  class="input--style-2" type="text" name="age" required="required"
+												value="<%=article.getAge()%>"></div>
+											<div class="input-group">
+											성별<input  class="input--style-2" type="text" name="gender" required="required"
+												value="<%=article.getGender()%>"></div>
+										
+										<div class="input-group">
+											키<input class="input--style-2"  type="text" name="height" required="required"
+												value="<%=article.getHeight()%>"></div>
+										
+										<div class="input-group">
+											몸무게<input  class="input--style-2" type="text" name="weight" required="required"
+												value="<%=article.getWeight()%>"></div>
+										
+										<div class="input-group">
+											전화번호<input class="input--style-2" type="text" name="phone" required="required"
+												value="<%=article.getPhone()%>"
+												placeholder="ex.000-0000-0000"></div>
+										
+										<div class="input-group">
+											이메일<input class="input--style-2" type="email" name="email" id="email" required="required"
+											 		value="<%=article.getEmail()%>"></div>
+								
+
+											
+											<div class="input-group">
+											주소<input class="input--style-2" type="text" name="postcode" id="postcode"
 												class="id" placeholder="우편번호"
 												value="<%=article.getPostcode()%>" readonly="readonly">
 												<input type="button" value="우편번호검색"
-												class="genric-btn info circle" onclick="execPostCode()"></td>
-										</tr>
-										<tr>
-											<td><input type="text" name="address" id="address"
+												class="genric-btn info circle" onclick="execPostCode()"></div>
+										
+
+											<div class="input-group">
+											<input class="input--style-2"  type="text" name="address" id="address"
 												placeholder="주소" size="46"
-												value="<%=article.getAddress()%>" readonly="readonly"></td>
-										</tr>
-										<tr>
-											<td><input type="text" name="detailAddress"
+												value="<%=article.getAddress()%>" readonly="readonly">
+											</div>
+										
+										
+											<div class="input-group">
+											<input class="input--style-2" type="text" name="detailAddress"
 												id="detailAddress" placeholder="상세주소"
 												value="<%=article.getDetailAddress()%>"> <input
 												type="text" name="extraAddress" id="extraAddress"
 												 value="<%=article.getExtraAddress()%>"
-												readonly="readonly"></td>
-										</tr>
-									</table>
-								</fieldset>
+												readonly="readonly">
+											</div>
+
 								<div id="buttons">
 									<input type="submit" value="정보수정"
-										class="genric-btn primary circle"> <input
-										type="button" value="뒤로" class="genric-btn success circle"
+										class="btn btn--radius btn--green" style="background: #57b846;  "> <input
+										type="button" value="뒤로" class="btn btn--radius btn--red" style="background: #ff0000;" 
 										onclick="history.back()">
+										</div>
+									</form>
 								</div>
-							</form>
-
-
-						</div>
-					
+							</div>
+						</section>
+					</div>
+				</div>
 				
+
+			</td>
+		</tr>
+	</table>
+
+
 </body>
 
 </html>

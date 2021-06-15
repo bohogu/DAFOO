@@ -24,18 +24,19 @@ public class BoardDAO {
 		}
 	}
 	
-	public int write(BoardBean bb) {
+	public int write(String nick, String title, String content, String file, String rfile, int bgroup) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String SQL = "insert into board(nick,title,content,date,file,bgroup) values(?,?,?,now(),?,?)";
+		String SQL = "insert into board(nick,title,content,date,file,rfile,bgroup) values(?,?,?,now(),?,?,?)";
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, bb.getNick());
-			pstmt.setString(2, bb.getTitle());
-			pstmt.setString(3, bb.getContent());
-			pstmt.setString(4, bb.getFile());
-			pstmt.setInt(5, bb.getBgroup());
+			pstmt.setString(1, nick);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			pstmt.setString(4, file);
+			pstmt.setString(5, rfile);
+			pstmt.setInt(6, bgroup);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -195,18 +196,18 @@ public class BoardDAO {
 		} return "";
 	}
 	
-	public int update(BoardBean bb) {
+	public int update(String title, String content, String file, String rfile, int bnum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String SQL = "update board SET title = ?, content = ?, file = ?, rfile = ? where bnum = ?";
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, bb.getTitle());
-			pstmt.setString(2, bb.getContent());
-			pstmt.setString(3, bb.getFile());
-			pstmt.setString(4, bb.getRfile());
-			pstmt.setInt(5, bb.getBnum());
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, file);
+			pstmt.setString(4, rfile);
+			pstmt.setInt(5, bnum);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -239,5 +240,21 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		} return -1;
+	}
+	public int getCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String SQL = "select count(*) from board";
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			ResultSet rs = pstmt.executeQuery();
+			
+			return rs.getInt("count");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return -1;
 	}
 }

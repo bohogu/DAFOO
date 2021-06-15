@@ -37,9 +37,9 @@ public class MemberDeleteProAction implements Action {
 					session.removeAttribute("id");
 					
 					forward = new ActionForward();
-					forward.setPath("MemberLoginPro.me");
+					forward.setPath("./member/login.jsp");
 					forward.setRedirect(true);
-					
+
 					
 				} else {
 					response.setContentType("text/html;charset=UTF-8");

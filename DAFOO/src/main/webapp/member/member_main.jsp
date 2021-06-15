@@ -36,19 +36,38 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>DAFOO</title>
-
+<link href="../assets/css/style.css" rel="stylesheet">
+<jsp:include page="../inc/top.jsp"></jsp:include>
 </head>
+<style>
+		#layout{
+		margin:0 auto;
+		width:100%;
+	} 
 
+
+</style>
 <body>
-								<h3>마이페이지</h3>
-								<ul class="list side_list">
-									<li><a href="MemberInfo.me">My 정보</a></li>
-									
-									<li><a href="MemberDelete.me">회원 탈퇴</a></li>
-								</ul>
-		<br /><br /><br />
-		
-		/${nick}/${mnum}/${id}/
+   <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                        <h1 class="title">마이 페이지 </h1>
+                       	<div class="p-t-10">
+                            <a href="MemberInfo.me"><button  class="btn btn--pill btn--yello" type="submit"> 내정보 </button></a>
+                            
+                        </div>
+                        <div class="p-t-10">
+                            <a href="MemberDelete.me"><button class="btn btn--pill btn--blue" type="submit"> 회원탈퇴 </button></a>
+                            
+                       </div>
+                      </div>
+  					</div>
+  				</div>	
+              </div>          		
+                        		
+
 
 
 </body>

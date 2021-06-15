@@ -10,10 +10,17 @@
 
 
 <html lang="zxx">
-<link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/layout.css">
+<link href="../assets/css/style.css" rel="stylesheet">
+<jsp:include page="../inc/top.jsp"></jsp:include>
 <head>
+<style>
+		#layout{
+		margin:0 auto;
+		width:100%;
+	} 
 
+
+</style>
 	<%
 		if (id == null) {
 	%>
@@ -24,21 +31,29 @@
 	<%
 		}
 	%>
-
+	
+</head>
 
 <body>
-
-						<!--         <section class="cart_area"> -->
-						<div class="container">
-							<div class="cart_inner">
-								<h2 class="member_title">회원탈퇴</h2><!-- .member_title -->
-								<form action="MemberDeletePro.me" method="post">
-			                    	비밀번호 확인 <input type="password" name="pass"> <input type="submit" value="탈퇴" class="genric-btn primary circle">
-			                    </form>
-							
-							</div>
-						</div>
-
+   <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                        <h1 class="title"> 회원탈퇴  </h1>
+                       	
+                        <div class="p-t-10">
+                           <form action="MemberDeletePro.me" method="post">  
+                           <input class="input--style-3" type="password" placeholder="비밀번호 확인" name="pass">
+                           	<input type="submit" value="탈퇴" class="btn btn--pill btn--red" >					
+                           </form>  	 						
+                       </div>
+                      </div>
+  					</div>
+  				</div>	
+              </div>   
+			
+			
 
     
 </body>

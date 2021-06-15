@@ -1,11 +1,15 @@
 package board.action;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import action.Action;
 import action.ActionForward;
-import board.db.BoardBean;
 import board.db.BoardDAO;
 
 public class BoardUpdateAction implements Action{
@@ -14,20 +18,37 @@ public class BoardUpdateAction implements Action{
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int bnum = Integer.parseInt(request.getParameter("bnum"));
-		
-		BoardBean bb = new BoardBean();
-		
-		bb.setNick(request.getParameter("nick"));
-		bb.setTitle(request.getParameter("title"));
-		bb.setContent(request.getParameter("content"));
-		bb.setFile(request.getParameter("file"));
-		bb.setBnum(Integer.parseInt(request.getParameter("bnum")));
-		bb.getBgroup();
+		MultipartRequest multi = null;
+		int fileMaxSize = 10 * 1024 * 1024;
+		String savePath = request.getRealPath("/upload").replaceAll("\\\\", "/");
+		try {
+			multi = new MultipartRequest(request, savePath, fileMaxSize, "UTF-8", new DefaultFileRenamePolicy());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		BoardDAO bdao = new BoardDAO();
 		
-		bdao.update(bb);
+		String title = multi.getParameter("boardTitle");
+		String content = multi.getParameter("boardContent");
+		int bnum = Integer.parseInt(multi.getParameter("bnum"));
+		String file = "";
+		String rfile = "";
+		File bfile = multi.getFile("boardFile");
+		if(bfile != null) {
+/*			String ext = bfile.getName().substring(bfile.getName().lastIndexOf(".") + 1);
+			if(ext.equals("jpg") || ext.equals("png") || ext.equals("gif") || ext.equals("jpeg")) {*/
+			file = multi.getOriginalFileName("boardFile");
+			rfile = bfile.getName();
+/*			}*/
+		}
+		
+		System.out.println(multi.getParameter("bnum"));
+		System.out.println(multi.getParameter("boardTitle"));
+		System.out.println(multi.getParameter("boardContent"));
+		System.out.println(multi.getParameter("boardFile"));
+		
+		bdao.update(title, content, file, rfile, bnum);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);

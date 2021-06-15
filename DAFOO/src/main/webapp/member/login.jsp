@@ -5,7 +5,8 @@
 	<title>DaFoo 로그인</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<!-- Template Main CSS File -->
+ <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <style>
 		#layout{
@@ -16,8 +17,10 @@
 
 </style>
 <body>
+
 	<table id="layout">
 		<tr style="height: 75px;">
+
 			<td><jsp:include page="../inc/top.jsp" /></td>
 		</tr>
 		<tr>
@@ -25,13 +28,12 @@
 	<div class="limiter">
 					<div class="container-login100">
 						<div class="wrap-login100">
-							<div class="login100-form-title"
-								style="background-image: url(../assets/img/bg-01.jpg);">
+							<div class="login100-form-title">
 								<span class="login100-form-title-1"> </span>
 							</div>
 
 							<form class="login100-form validate-form"
-								action="MemberLoginPro.me" method="post" novalidate="novalidate">
+									action="MemberLoginPro.me" method="post" novalidate="novalidate">
 								<div class="wrap-input100 validate-input m-b-26"
 									data-validate="Username is required">
 									<span class="label-input100">아이디</span> <input class="input100"
@@ -56,6 +58,14 @@
 
 									<div>
 										<a href="MemberAgreeForm.me" class="txt1"> 회원가입 </a>
+									</div>
+									<div>
+										<a href="MemberFind.me"  
+												class="txt1">아이디 찾기</a>
+									</div>
+									<div>
+										<a href="MemberPass.me" 
+														class="txt1">비밀번호 찾기</a>
 									</div>
 								</div>
 

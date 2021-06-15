@@ -257,7 +257,127 @@ public class MemberDAO {
 		}
 	}
 
+	//회원 아이디 찾기 
+	public int emailCheck(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberBean mb = null;
+		int check = 0;
+		
+		try {
+			con = getConnection();
+			String sql = "select * from pmember WHERE email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = 1;
+				mb = new MemberBean();
+				mb.setId(rs.getString("id"));
+			}
+			else {
+				check = 0;
+			}
+		} catch (Exception e) {
+			System.out.println("/member/emailCheck() 오류! - " + e.getMessage());
+			e.printStackTrace();
+			
+		} finally {
+			freeResource(con, pstmt, rs);
+		}
+		return check;
+	}
+	
+	public MemberBean getId(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberBean mb = null;
+		
+		try {
+			con = getConnection();
+			String sql = "select * from pmember where email = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();		
+			
+			if(rs.next()) {
+				mb = new MemberBean();
+				mb.setId(rs.getString("id"));
+			}
+		} catch (Exception e) {
+			System.out.println("/member/getId() 오류! - " + e.getMessage());
+			e.printStackTrace();
+			
+		} finally {
+			freeResource(con, pstmt, rs);
+		}
+		return mb;
+	}
 
+//회원비밀번호 찾기 	
+	public int IDCheck(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberBean mb = null;
+		int check = 0;
+		
+		try {
+			con = getConnection();
+			String sql = "select * from pmember where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = 1;
+				mb = new MemberBean();
+				mb.setPass(rs.getString("pass"));
+			}
+			else {
+				check = 0;
+			}
+		} catch (Exception e) {
+			System.out.println("/member/IDCheck() 오류! - " + e.getMessage());
+			e.printStackTrace();
+			
+		} finally {
+			freeResource(con, pstmt, rs);
+		}
+		return check;
+	}	
+	
+		public MemberBean getPass(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberBean mb = null;
+		
+		try {
+			con = getConnection();
+			String sql = "select * from pmember where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();		
+			
+			if(rs.next()) {
+				mb = new MemberBean();
+				mb.setPass(rs.getString("pass"));
+			}
+		} catch (Exception e) {
+			System.out.println("/member/getId() 오류! - " + e.getMessage());
+			e.printStackTrace();
+			
+		} finally {
+			freeResource(con, pstmt, rs);
+		}
+		return mb;
+	}
 	// 전체 회원 정보 담기
 	public ArrayList<MemberBean> selectArticleList(int page, int limit) {
 		System.out.println("MemberDAO - selectArticleList()");
